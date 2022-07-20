@@ -13,15 +13,13 @@ import { motion } from 'framer-motion'
 import { useSetGlobals } from '../../lib/hooks';
 import TitleComponent from '../../components/global/title/title.component';
 import { SectionStyles } from '../../styles/global.styles.components';
-import { DownloadsStyles } from './index.styles';
-import { ContactStyles } from './index.styles';
+import { ContactStyles } from  '../../styles/modules/provi/index.styles';
 // Helpers
 
 const Provi = ({ locale, content, global }) => {
 
     const snap = useSnapshot(state);
     useSetGlobals( global );
-    console.log(content)
     
     const conceptContent = content?.proviEntries[0]?.conceptContent || '';
     const conceptTitleUrl = content?.proviEntries[0]?.conceptTitle[0]?.url || '';

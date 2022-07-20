@@ -13,8 +13,9 @@ import { motion } from 'framer-motion'
 import { useSetGlobals } from '../../lib/hooks';
 import TitleComponent from '../../components/global/title/title.component';
 import { SectionStyles } from '../../styles/global.styles.components';
-import { DownloadsStyles } from './index.styles';
-// Helpers
+import { DownloadsStyles } from '../../styles/modules/mieten/index.styles';
+
+
 const Mieten = ({ locale, content, global }) => {
 
     const snap = useSnapshot(state);
@@ -60,7 +61,7 @@ const Mieten = ({ locale, content, global }) => {
 	)
 }
 
-export default Mieten
+export default Mieten;
 
 
 export const getStaticProps = async(locale) => {

@@ -12,8 +12,6 @@ function FooterComponent() {
     const router = useRouter();
     const locale = router.locale;
 
-    console.log(locale, locale == "en")
-
     return (
         <FooterStyles backgroundColor={ global?.colors?.current}>
             <div className="provi-footer-email">
