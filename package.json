@@ -12,6 +12,7 @@
     "@apollo/client": "^3.6.9",
     "device-detector-js": "^3.0.3",
     "framer-motion": "^6.5.1",
+    "graphql": "^16.5.0",
     "i18next": "^21.8.14",
     "next": "12.2.2",
     "react": "18.2.0",
