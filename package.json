@@ -9,11 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "device-detector-js": "^3.0.3",
+    "framer-motion": "^6.5.1",
+    "i18next": "^21.8.14",
     "next": "12.2.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "styled-components": "^5.3.5",
+    "valtio": "^1.6.2"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.7",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.2"
   }
