@@ -23,6 +23,7 @@ export default createGlobalStyle`
     body {
         margin: 0;
         padding: 0;
+        font-family: 'Rodger';
     }
 
     ul, 
@@ -48,5 +49,10 @@ export default createGlobalStyle`
 
     p {
         margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
     }
 `

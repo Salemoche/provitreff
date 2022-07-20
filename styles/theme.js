@@ -5,6 +5,9 @@ const theme = {
         M: 768,
         L: 1024,
         XL: 1800,
+    },
+    sizes: {
+        contentWidth: 640,
     }
 }
 

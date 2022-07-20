@@ -7,4 +7,11 @@ export const HeaderStyles = styled('header')`
     left: 0;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+
+    nav {
+        display: flex;
+        justify-content: center;
+    }
+
 `

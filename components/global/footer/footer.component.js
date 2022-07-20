@@ -2,6 +2,7 @@ import React from 'react'
 import { FooterStyles } from './footer.styles'
 import { useSnapshot } from 'valtio';
 import { state } from '../../../lib/state';
+import Link from 'next/link';
 
 function FooterComponent() {
 
@@ -18,8 +19,8 @@ function FooterComponent() {
             </div>
             <div className="provi-footer-address" dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
             <div className="provi-footer-language-switcher">
-                <div className="provi-de" onClick={() => changeLanguage('de')}>DE</div>/
-                <div className="provi-en" onClick={() => changeLanguage('en')}>EN</div>
+                <Link className="provi-de" href="" locale="de">DE</Link>/
+                <Link className="provi-en" href="" locale="en">EN</Link>
             </div>
         </FooterStyles>
     )

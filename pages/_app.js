@@ -19,18 +19,18 @@ import { AnimatePresence } from 'framer-motion'
 // import { alwaysScripts } from '../lib/helpers';
 import { useDeviceDetector } from '../lib/hooks';
 // import '../i18n';
+import { useCurrentColor } from '../lib/hooks';
 
 
 function MyApp({ Component, pageProps }) {
     const route = useRouter().route;
     const snap = useSnapshot( state );
 
-    console.log(useRouter())
-
     const alwaysScripts = () => {
     }
 
     useDeviceDetector();
+    useCurrentColor( route, snap );
 
     useEffect(() => {
 
