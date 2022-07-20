@@ -14,13 +14,12 @@ import { useSetGlobals } from '../lib/hooks';
 import TitleComponent from '../components/global/title/title.component';
 
 // Helpers
-const Home = ({ locale, aktuell, global }) => {
+const Home = ({ locale, content, global }) => {
 
     const snap = useSnapshot(state);
     useSetGlobals( global );
     
-    const programTitleUrl = aktuell?.currentEntries[0]?.programTitle[0]?.url;
-    console.log('thesnap:', snap.global, global?.colors?.colors[1])
+    const programTitleUrl = content?.currentEntries[0]?.programTitle[0]?.url;
 
 	return (
         <motion.div
@@ -50,7 +49,7 @@ export const getStaticProps = async(locale) => {
             break;
     }
 
-    const aktuellData = await apolloClient.query({
+    const contentData = await apolloClient.query({
         query: AKTUELL_QUERY(),
         variables: {
             language: language
@@ -62,13 +61,13 @@ export const getStaticProps = async(locale) => {
     });
 
     
-    const aktuell = aktuellData.data;
+    const content = contentData.data;
     const global = globalData.data;
     
     return {
         props: {
             locale,
-            aktuell,
+            content,
             global
         }
     }

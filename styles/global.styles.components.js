@@ -5,13 +5,20 @@ export const ContentStyles = styled('div')`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 240px;
+    padding-top: 200px;
+    padding-bottom: ${ props => props.theme.sizes.L }px;
+    
 
     > * {
-        max-width: ${props => props.theme.sizes.contentWidth}px;
+        max-width: 100%;
+        width: ${props => props.theme.sizes.contentWidth}px;
 
         &.provi-title {
-            max-width: unset;
+            width: 100%;
         }
     }
+`
+
+export const SectionStyles = styled('div')`
+    margin-bottom: ${ props => props.theme.sizes.M }px
 `

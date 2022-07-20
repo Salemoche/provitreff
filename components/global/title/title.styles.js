@@ -5,4 +5,6 @@ export const TitleStyles = styled('div')`
     max-width: 100%;
     display: flex;
     justify-content: center;
+    height: 90px;
+    margin-bottom: ${ props => props.theme.sizes.M }px
 `

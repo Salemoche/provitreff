@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { getFontSize } from "../lib/helpers";
 
 export default createGlobalStyle`
     @font-face {
@@ -24,6 +25,7 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Rodger';
+        ${ props => getFontSize( 'M', props )}
     }
 
     ul, 
@@ -49,6 +51,7 @@ export default createGlobalStyle`
 
     p {
         margin: 0;
+        margin-bottom: ${ props => props.theme.sizes.S }px
     }
 
     a {
