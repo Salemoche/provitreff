@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@emotion/react": "^11.10.4",
+    "@ericz1803/react-google-calendar": "^4.2.2",
     "device-detector-js": "^3.0.3",
     "framer-motion": "^6.5.1",
     "graphql": "^16.5.0",
