@@ -7,7 +7,7 @@ export const FooterStyles = styled('footer')`
     left: 0;
     display: flex;
     justify-content: center;
-    border-top: 1px solid black;
+    border-top: 3px solid black;
     background: ${ props => props.backgroundColor };
     
     

@@ -27,6 +27,9 @@ export const HeaderStyles = styled('header')`
 `
 
 export const MenuItemStyles = styled('a')`
+
+    text-transform: uppercase;
+
     ${ props => {
         if (props.currentMenuItem) {
             return css`

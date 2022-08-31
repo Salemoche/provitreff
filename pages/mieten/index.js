@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 // Components
 import LayoutComponent from '../../components/global/layout/layout.component';
-
 
 // Data
 import { apolloClient } from '../../lib/apolloClient';
@@ -13,7 +14,9 @@ import { motion } from 'framer-motion'
 import { useSetGlobals } from '../../lib/hooks';
 import TitleComponent from '../../components/global/title/title.component';
 import { SectionStyles } from '../../styles/global.styles.components';
-import { DownloadsStyles } from '../../styles/modules/mieten/index.styles';
+import { CalendarContainerStyles, DownloadsStyles, CalendarTitlesStyles } from '../../styles/modules/mieten/index.styles';
+import { CalendarTitleStyles } from '../../styles/modules/mieten/index.styles';
+import CalendarComponent from '../../components/rent/calendar.component';
 
 
 const Mieten = ({ locale, content, global }) => {
@@ -33,6 +36,8 @@ const Mieten = ({ locale, content, global }) => {
     const occupancyTitleUrl = content?.rentEntries[0]?.occupancyTitle[0]?.url || '';
     const termsContent = content?.rentEntries[0]?.termsContent || '';
     const termsTitleUrl = content?.rentEntries[0]?.termsTitle[0]?.url || '';
+
+    const [currentCalendar, setCurrentCalendar] = useState('culture')
     
 	return (
         <motion.div
@@ -48,6 +53,28 @@ const Mieten = ({ locale, content, global }) => {
                 <div dangerouslySetInnerHTML={{__html: infoContent }}></div>
                 <TitleComponent url={occupancyTitleUrl} id="occupancy"/>
                 <SectionStyles dangerouslySetInnerHTML={{__html: occupancyContent }}></SectionStyles>
+                <SectionStyles>
+                    <CalendarTitlesStyles>
+                        <CalendarTitleStyles className="provi-calendar-title-culture" active={ currentCalendar == 'culture' } onClick={ () => setCurrentCalendar('culture') }>{ cultureTitle }</CalendarTitleStyles> 
+                        / 
+                        <CalendarTitleStyles className="provi-calendar-title-movement" active={ currentCalendar == 'movement' } onClick={ () => setCurrentCalendar('movement') }>{ movementTitle }</CalendarTitleStyles>
+                    </CalendarTitlesStyles>
+                    <CalendarContainerStyles>
+                        <div className="provi-calendar-container">
+                            { currentCalendar == 'culture' ?
+                                <CalendarComponent calendar={ cultureCalendar } />
+                            :
+                                <CalendarComponent calendar={ movementCalendar } />
+                            }
+                        </div>
+                        <div className="provi-calendar-tooltips">
+                            <div className="provi-calendar-tooltips__title"> Tooltips </div>
+                            <div className="provi-calendar-tooltip reserved"> { 'reserved' } </div>
+                            <div className="provi-calendar-tooltip free"> { 'free' } </div>
+                            <div className="provi-calendar-tooltip occupied"> { 'occupied' } </div>
+                        </div>
+                    </CalendarContainerStyles>
+                </SectionStyles>
                 <TitleComponent url={termsTitleUrl} id="terms"/>
                 <SectionStyles dangerouslySetInnerHTML={{__html: termsContent }}></SectionStyles>
                 <TitleComponent url={downloadTitleUrl} id="download"/>
