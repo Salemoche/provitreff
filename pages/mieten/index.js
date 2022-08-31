@@ -79,8 +79,8 @@ const Mieten = ({ locale, content, global }) => {
                 <SectionStyles dangerouslySetInnerHTML={{__html: termsContent }}></SectionStyles>
                 <TitleComponent url={downloadTitleUrl} id="download"/>
                 <DownloadsStyles>
-                    { downloads.map( download => (
-                        <a href={download?.downloadFile[0]?.url} download>{ download?.downloadName }</a>
+                    { downloads.map( ( download, i ) => (
+                        <a href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
                     ))}
                 </DownloadsStyles>
             </LayoutComponent>

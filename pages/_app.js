@@ -11,6 +11,9 @@ import { proxy, useSnapshot } from 'valtio';
 import theme from '../styles/theme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from '../styles/global.styles';
+import "@fullcalendar/common/main.css";
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
 
 // Animation
 import { AnimatePresence } from 'framer-motion'
