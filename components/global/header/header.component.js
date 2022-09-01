@@ -10,6 +10,7 @@ function HeaderComponent() {
     const snap = useSnapshot(state);
     const router = useRouter();
     const locale = router.locale;
+    const global = snap.global;
 
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -42,11 +43,16 @@ function HeaderComponent() {
                     <li>
                         <MenuItemStyles href="/provi" currentMenuItem={router.pathname == "/provi"}>Provi</MenuItemStyles>
                     </li>
-                     <li>{ snap.device.mode }</li>
                 </ul>
                 } 
+                <div className="provi-navigation-info">
+                    <a href={ global?.proviEmail }>{global?.proviEmail}</a>
+                    <div dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
+                </div>
             </nav>
-            <BurgerStyles onClick={() => { setMenuOpen(!menuOpen) }}></BurgerStyles>
+            <BurgerStyles onClick={() => { setMenuOpen(!menuOpen) }}>
+                <img src="/assets/img/burger.svg" alt="" />
+            </BurgerStyles>
         </HeaderStyles>
     )
 }

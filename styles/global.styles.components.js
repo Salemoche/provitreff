@@ -24,6 +24,10 @@ export const ContentStyles = styled('div')`
         padding-right: ${ props => props.theme.sizes.L }px;
         width: unset;
         max-width: 100%;
+
+        > * {
+            width: 100%;
+        }
     }
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {

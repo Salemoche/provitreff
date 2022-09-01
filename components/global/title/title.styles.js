@@ -36,6 +36,7 @@ export const TitleStyles = styled('div')`
         } }; */
 
         img {
+            width: auto !important;
             object-position: left;
             /* width: 100%;
             height: auto;

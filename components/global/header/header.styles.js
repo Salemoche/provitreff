@@ -25,13 +25,18 @@ export const HeaderStyles = styled('header')`
             display: flex;
             justify-content: space-between;
         }
+
+        .provi-navigation-info {
+            flex-direction: column;
+            display: none;
+        }
     }
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
 
         .provi-title {
             margin-bottom: 0;
-            
+
             img {
                 max-width: calc( 100% - ${ props => props.theme.sizes.M }px - 40px)
             }
@@ -39,32 +44,43 @@ export const HeaderStyles = styled('header')`
 
         nav {
             ${ props => getFontSize( 'M', props )};
+            height: calc( 100vh - 90px );
+            max-height: 0;
+            opacity: 0;
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            ${ props => {
+                if ( props.active ) {
+                    return css`
+                        opacity: 1;
+                        max-height: calc( 100vh - 90px );
+                        padding-bottom:  ${ props => props.theme.sizes.S }px;
+                    `
+                }
+            }}
 
             ul {
-                height: calc( 100vh - 110px );
-                max-height: 0;
                 padding-bottom: 0;
-                opacity: 0;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                transition: .3s;
-                
+                justify-content: center;    
+                margin-top: auto;
+
                 li {
                     margin-bottom:  ${ props => props.theme.sizes.M }px;
                 }
+            }
 
-                ${ props => {
-                    if ( props.active ) {
-                        return css`
-                            opacity: 1;
-                            max-height: calc( 100vh - 110px );
-                            padding-bottom:  ${ props => props.theme.sizes.S }px;
-                        `
-                    }
-                }}
+            .provi-navigation-info {
+                margin-top: auto;
+                display: flex;
+                align-items: center;
             }
         }
     }
@@ -97,11 +113,11 @@ export const BurgerStyles = styled('div')`
 
     width: 35px;
     height: 40px;
-    background: green;
     position: absolute;
     right: ${ props => props.theme.sizes.S }px;
     top: ${ props => props.theme.sizes.S }px;
     cursor pointer;
+    display: none;
     
 
     ${ props => {
@@ -113,4 +129,8 @@ export const BurgerStyles = styled('div')`
             `
         }
     } };
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+        display: inherit;
+    }
 `

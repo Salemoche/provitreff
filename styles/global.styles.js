@@ -77,7 +77,11 @@ export default createGlobalStyle`
     figure {
         margin: 0;
         padding: 0;
-        margin-bottom: ${ props => props.theme.sizes.M }px
+        margin-bottom: ${ props => props.theme.sizes.M }px;
+        
+        img {
+            width: 100%;
+        }
     }
 
     button,
