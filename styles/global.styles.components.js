@@ -5,7 +5,7 @@ export const ContentStyles = styled('div')`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 200px;
+    padding-top: ${ props => props.theme.sizes.navPadding }px;
     padding-bottom: ${ props => props.theme.sizes.L }px;
     
 
@@ -16,6 +16,20 @@ export const ContentStyles = styled('div')`
         &.provi-title {
             width: 100%;
         }
+    }
+
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+        padding-left: ${ props => props.theme.sizes.L }px;
+        padding-right: ${ props => props.theme.sizes.L }px;
+        width: unset;
+        max-width: 100%;
+    }
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+        padding-left: ${ props => props.theme.sizes.S }px;
+        padding-right: ${ props => props.theme.sizes.S }px;
+        padding-top: ${ props => props.theme.sizes.navPaddingMedium }px;
     }
 `
 

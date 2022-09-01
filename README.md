@@ -33,3 +33,14 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 # provitreff
+
+# Prequisites
+
+add to .htaccess:
+
+<ifModule mod_headers.c>
+    Header always set Access-Control-Allow-Headers "X-Requested-With, Authorization, Content-Type, Request-Method"
+    Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+    SetEnvIf Origin "^http(s)?://(.+\.)?(localhost|provitreff.bachstein.com|bachstein.com)(:[0-9]+)?$" origin_is=$0
+    Header always set Access-Control-Allow-Origin %{origin_is}e env=origin_is
+</ifModule>

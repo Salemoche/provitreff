@@ -12,14 +12,18 @@ import { state } from '../lib/state';
 import { motion } from 'framer-motion'
 import { useSetGlobals } from '../lib/hooks';
 import TitleComponent from '../components/global/title/title.component';
+import { EventStyles, ProgramStyles } from '../styles/modules/aktuell/index.styles';
+import { cleanHTML } from '../lib/helpers';
 
 // Helpers
+
 const Home = ({ locale, content, global }) => {
 
     const snap = useSnapshot(state);
     useSetGlobals( global );
     
     const programTitleUrl = content?.currentEntries[0]?.programTitle[0]?.url;
+    const program = content?.currentEntries[0]?.program;
 
 	return (
         <motion.div
@@ -31,6 +35,22 @@ const Home = ({ locale, content, global }) => {
         >
             <LayoutComponent>
                 <TitleComponent url={programTitleUrl}/>
+                <ProgramStyles>
+                    { program.map( month => (
+                        <div className="month" key={month.month} id={month.month}>
+                            <h2>{ month.month }</h2>
+
+                            { month.selected_events.map( event => (
+                                <EventStyles key={event.title}>
+                                    <div>{ event.eventTime }</div>
+                                    <div>{ event.title }</div>
+                                    { event.eventInfo && <div dangerouslySetInnerHTML={{ __html: cleanHTML(event.eventInfo) }}></div> }
+                                    { event.eventTags && <div>{ event.eventTags }</div> }
+                                </EventStyles>
+                            ))}
+                        </div>
+                    ))}
+                </ProgramStyles>
             </LayoutComponent>
         </motion.div>
 	)

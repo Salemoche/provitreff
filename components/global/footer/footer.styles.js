@@ -9,6 +9,16 @@ export const FooterStyles = styled('footer')`
     justify-content: center;
     border-top: 3px solid black;
     background: ${ props => props.backgroundColor };
+
+    a {
+        transition: .1s;
+
+        &:hover {
+            color: transparent;
+            -webkit-text-stroke: 2px black;
+            text-stroke: 2px black;
+        }
+    }
     
     
     > div {
@@ -27,12 +37,19 @@ export const FooterStyles = styled('footer')`
             text-align: right;
         }
     }
+
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+        display: none;
+    }
+
 `
 
 
 export const LanguageSwitcherStyles = styled('a')`
 
     margin: 0 ${ props => props.theme.sizes.XS }px;
+    cursor: pointer;
     
     &:last-of-type {
         margin-right: 0;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import dynamic from 'next/dynamic'
 
 // Components
 import LayoutComponent from '../../components/global/layout/layout.component';
@@ -16,7 +17,10 @@ import TitleComponent from '../../components/global/title/title.component';
 import { SectionStyles } from '../../styles/global.styles.components';
 import { CalendarContainerStyles, DownloadsStyles, CalendarTitlesStyles } from '../../styles/modules/mieten/index.styles';
 import { CalendarTitleStyles } from '../../styles/modules/mieten/index.styles';
-import CalendarComponent from '../../components/rent/calendar.component';
+import { cleanHTML } from '../../lib/helpers';
+const CalendarComponent = dynamic( () => import('../../components/rent/calendar.component'),{
+    ssr: false
+});
 
 
 const Mieten = ({ locale, content, global }) => {
@@ -49,10 +53,10 @@ const Mieten = ({ locale, content, global }) => {
         >
             <LayoutComponent>
                 <TitleComponent url={infoTitleUrl} id="info"/>
-                <SectionStyles dangerouslySetInnerHTML={{__html: infoContent }}></SectionStyles>
-                <div dangerouslySetInnerHTML={{__html: infoContent }}></div>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(infoContent) }}></SectionStyles>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(infoContent) }}></SectionStyles>
                 <TitleComponent url={occupancyTitleUrl} id="occupancy"/>
-                <SectionStyles dangerouslySetInnerHTML={{__html: occupancyContent }}></SectionStyles>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(occupancyContent) }}></SectionStyles>
                 <SectionStyles>
                     <CalendarTitlesStyles>
                         <CalendarTitleStyles className="provi-calendar-title-culture" active={ currentCalendar == 'culture' } onClick={ () => setCurrentCalendar('culture') }>{ cultureTitle }</CalendarTitleStyles> 
@@ -62,25 +66,25 @@ const Mieten = ({ locale, content, global }) => {
                     <CalendarContainerStyles>
                         <div className="provi-calendar-container">
                             { currentCalendar == 'culture' ?
-                                <CalendarComponent calendar={ cultureCalendar } />
+                                <CalendarComponent calendarId={ cultureCalendar } locale={locale} />
                             :
-                                <CalendarComponent calendar={ movementCalendar } />
+                                <CalendarComponent calendarId={ movementCalendar } locale={locale} />
                             }
                         </div>
-                        <div className="provi-calendar-tooltips">
+                        {/* <div className="provi-calendar-tooltips">
                             <div className="provi-calendar-tooltips__title"> Tooltips </div>
                             <div className="provi-calendar-tooltip reserved"> { 'reserved' } </div>
                             <div className="provi-calendar-tooltip free"> { 'free' } </div>
                             <div className="provi-calendar-tooltip occupied"> { 'occupied' } </div>
-                        </div>
+                        </div> */}
                     </CalendarContainerStyles>
                 </SectionStyles>
                 <TitleComponent url={termsTitleUrl} id="terms"/>
-                <SectionStyles dangerouslySetInnerHTML={{__html: termsContent }}></SectionStyles>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(termsContent) }}></SectionStyles>
                 <TitleComponent url={downloadTitleUrl} id="download"/>
                 <DownloadsStyles>
                     { downloads.map( ( download, i ) => (
-                        <a href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
+                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
                     ))}
                 </DownloadsStyles>
             </LayoutComponent>

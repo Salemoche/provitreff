@@ -1,5 +1,5 @@
-import React from 'react'
-import { HeaderStyles, MenuItemStyles } from './header.styles'
+import React, { useState } from 'react'
+import { HeaderStyles, MenuItemStyles, BurgerStyles } from './header.styles'
 import TitleComponent from '../title/title.component';
 import { Link } from 'next/link';
 import { useSnapshot } from 'valtio';
@@ -11,9 +11,11 @@ function HeaderComponent() {
     const router = useRouter();
     const locale = router.locale;
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
-        <HeaderStyles backgroundColor={snap?.global?.colors?.current}>
-            <TitleComponent url={snap?.global?.proviLogo} />
+        <HeaderStyles backgroundColor={snap?.global?.colors?.current} active={menuOpen}>
+            <TitleComponent url={snap?.global?.proviLogo} link={`/${locale}`} isMain={true} />
             <nav>
                 { locale === 'en' ?
                 
@@ -40,9 +42,11 @@ function HeaderComponent() {
                     <li>
                         <MenuItemStyles href="/provi" currentMenuItem={router.pathname == "/provi"}>Provi</MenuItemStyles>
                     </li>
+                     <li>{ snap.device.mode }</li>
                 </ul>
-                }
+                } 
             </nav>
+            <BurgerStyles onClick={() => { setMenuOpen(!menuOpen) }}></BurgerStyles>
         </HeaderStyles>
     )
 }

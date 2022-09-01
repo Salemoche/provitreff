@@ -15,15 +15,15 @@ function FooterComponent() {
     return (
         <FooterStyles backgroundColor={ global?.colors?.current}>
             <div className="provi-footer-email">
-                <a href={ global?.proviEmail }>{global?.proviEmail}</a>
+                <a className="provi-hover-text" href={ global?.proviEmail }>{global?.proviEmail}</a>
             </div>
             <div className="provi-footer-address" dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
             <div className="provi-footer-language-switcher">
                 <Link className="provi-de" href="" locale="de">
-                    <LanguageSwitcherStyles currentLanguage={locale == "de"}>DE</LanguageSwitcherStyles>
+                    <LanguageSwitcherStyles className="provi-hover-text" currentLanguage={locale == "de"}>DE</LanguageSwitcherStyles>
                 </Link>/
                 <Link className="provi-en" href="" locale="en">
-                    <LanguageSwitcherStyles currentLanguage={locale == "en"}>EN</LanguageSwitcherStyles>
+                    <LanguageSwitcherStyles className="provi-hover-text" currentLanguage={locale == "en"}>EN</LanguageSwitcherStyles>
                 </Link>
             </div>
         </FooterStyles>

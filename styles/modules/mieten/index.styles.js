@@ -18,6 +18,13 @@ export const CalendarTitleStyles = styled('h3')`
     display: inline-block;
     text-transform: uppercase;
     margin-bottom: ${ props => props.theme.sizes.S }px;
+    transition: .1s;
+
+    &:hover {
+        color: transparent;
+        -webkit-text-stroke: 2px black;
+        text-stroke: 2px black;
+    }
 
     &.provi-calendar-title-culture {
         margin-right: ${ props => props.theme.sizes.S }px;
@@ -42,20 +49,20 @@ export const CalendarTitleStyles = styled('h3')`
 `
 
 export const CalendarContainerStyles = styled('div')`
-    display: flex;
+    /* display: flex; */
     gap: ${ props => props.theme.sizes.S }px;
     
     width: 100%;
 
     .provi-calendar-container {
-        width: 75%;
+        width: 100%;
 
         iframe {
             width: 100%;
         }
     }
 
-    .provi-calendar-tooltips {
+    /* .provi-calendar-tooltips {
         width: 25%;
 
 
@@ -68,5 +75,5 @@ export const CalendarContainerStyles = styled('div')`
             margin-bottom: ${ props => props.theme.sizes.S }px;
             padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.XS }px;
         }
-    }
+    } */
 `

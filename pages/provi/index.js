@@ -14,6 +14,7 @@ import { useSetGlobals } from '../../lib/hooks';
 import TitleComponent from '../../components/global/title/title.component';
 import { SectionStyles } from '../../styles/global.styles.components';
 import { ContactStyles } from  '../../styles/modules/provi/index.styles';
+import { cleanHTML } from '../../lib/helpers';
 // Helpers
 
 const Provi = ({ locale, content, global }) => {
@@ -39,11 +40,11 @@ const Provi = ({ locale, content, global }) => {
         >
             <LayoutComponent>
                 <TitleComponent url={conceptTitleUrl} id="concept"/>
-                <SectionStyles dangerouslySetInnerHTML={{__html: conceptContent }}></SectionStyles>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(conceptContent) }}></SectionStyles>
                 <TitleComponent url={contactTitleUrl} id="contact"/>
-                <ContactStyles dangerouslySetInnerHTML={{__html: contactContent }}></ContactStyles>
+                <ContactStyles dangerouslySetInnerHTML={{__html: cleanHTML(contactContent) }}></ContactStyles>
                 <TitleComponent url={historyTitleUrl} id="history"/>
-                <SectionStyles dangerouslySetInnerHTML={{__html: historyContent }}></SectionStyles>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(historyContent) }}></SectionStyles>
             </LayoutComponent>
         </motion.div>
 	)
