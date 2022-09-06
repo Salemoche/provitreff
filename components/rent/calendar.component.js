@@ -7,7 +7,6 @@ import deLocale from '@fullcalendar/core/locales/de'
 import { useSnapshot } from 'valtio';
 import { state } from '../../lib/state';
 
-
 const CalendarComponent = ({ calendarId, locale }) => {
         
     const calendarRef = useRef();

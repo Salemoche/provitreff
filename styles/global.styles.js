@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { getFontSize } from "../lib/helpers";
+import arrowRight from '/public/assets/img/arrow-right.svg'
+import arrowLeft from '/public/assets/img/arrow-right.svg'
 
 export default createGlobalStyle`
     @font-face {
@@ -78,7 +80,7 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         margin-bottom: ${ props => props.theme.sizes.M }px;
-        
+
         img {
             width: 100%;
         }
@@ -88,13 +90,28 @@ export default createGlobalStyle`
     .button,
     input[type=submit] {
 
+        font-family: 'Rodger';
+        ${ props => getFontSize( 'M', props )}
         border: 3px solid black;            
         padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.XS }px;
         background: none;
         color: black;
+        -webkit-text-stroke: 2px transparent;
+        text-stroke: 2px transparent;
+        cursor: pointer;
 
         &:disabled {
-            border: none;
+            ${'' /* border: none; */}
+        }
+
+        transition: .1s;
+
+        &:hover {
+            ${'' /* transition: .1s; */}
+            color: transparent;
+            -webkit-text-stroke: 2px black;
+            text-stroke: 2px black;
+            ${'' /* background: black; */}
         }
     }
 
@@ -121,38 +138,72 @@ export default createGlobalStyle`
 
     ${'' /* FullCalendar */}
 
-    .fc-next-button,
-    .fc-prev-button {
-        padding: ${ props => props.theme.sizes.XS }px;
-        margin-right: ${ props => props.theme.sizes.XS }px;
+    .fc-toolbar-title {
         margin-bottom: ${ props => props.theme.sizes.XS }px;
     }
 
-    ${'' /* .fc-prev-button {
-        padding: ${ props => props.theme.sizes.XS }px;
+    .fc-toolbar-chunk, .fc-button-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .fc-today-button {
         margin-right: ${ props => props.theme.sizes.XS }px;
-    } */}
+    }
 
-    table {
-        width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
+    .fc-next-button,
+    .fc-prev-button {
+        ${'' /* padding: ${ props => props.theme.sizes.XS }px; */}
+        margin-right: ${ props => props.theme.sizes.XS }px;
+        ${'' /* margin-bottom: ${ props => props.theme.sizes.XS }px; */}
+        cursor: pointer;
+        padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.S }px;
+    }
 
-        th {
-            text-align: left;
+    .fc-prev-button {
+        ${'' /* background-image: url(${ arrowLeft }); */}
+        ${'' /* background: green; */}
+
+        &:before {
+            content: '<'
         }
+    }
 
-        td {
-            border: 3px solid black;
-            vertical-align: baseline;
+    .fc-next-button {
+        ${'' /* background-image: url(${ arrowLeft }); */}
+        ${'' /* background: green; */}
 
-            &[role=presentation] {
-                border: none;
+        &:before {
+            content: '>'
+        }
+    }
+
+    .fc-view-harness {
+
+        margin-top: ${ props => props.theme.sizes.XS }px;
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+
+            th {
+                text-align: left;
             }
 
-            > div {
-                aspect-ratio: 2/1;
+            td {
+                border: 3px solid black;
+                vertical-align: baseline;
+
+                &[role=presentation] {
+                    border: none;
+                }
+
+                > div {
+                    aspect-ratio: 2/1;
+                }
             }
         }
+
     }
 `

@@ -13,13 +13,19 @@ import { state } from '../../lib/state';
 // Animation
 import { motion } from 'framer-motion'
 import { useSetGlobals } from '../../lib/hooks';
+import { cleanHTML } from '../../lib/helpers';
+
+// Components
+import FlexibleContentComponent from '../../components/global/flexible-content/flexible-content.component';
 import TitleComponent from '../../components/global/title/title.component';
 import { SectionStyles } from '../../styles/global.styles.components';
 import { CalendarContainerStyles, DownloadsStyles, CalendarTitlesStyles } from '../../styles/modules/mieten/index.styles';
 import { CalendarTitleStyles } from '../../styles/modules/mieten/index.styles';
-import { cleanHTML } from '../../lib/helpers';
+
+
 const CalendarComponent = dynamic( () => import('../../components/rent/calendar.component'),{
     ssr: false
+
 });
 
 
@@ -38,8 +44,10 @@ const Mieten = ({ locale, content, global }) => {
     const movementTitle = content?.rentEntries[0]?.movementTitle || '';
     const occupancyContent = content?.rentEntries[0]?.occupancyContent || '';
     const occupancyTitleUrl = content?.rentEntries[0]?.occupancyTitle[0]?.url || '';
-    const termsContent = content?.rentEntries[0]?.termsContent || '';
-    const termsTitleUrl = content?.rentEntries[0]?.termsTitle[0]?.url || '';
+    // const termsContent = content?.rentEntries[0]?.termsContent || '';
+    // const termsTitleUrl = content?.rentEntries[0]?.termsTitle[0]?.url || '';
+    const flexibleContentRent1 = content?.rentEntries[0]?.flexibleContentRent1 || [];
+    const flexibleContentRent2 = content?.rentEntries[0]?.flexibleContentRent2 || [];
 
     const [currentCalendar, setCurrentCalendar] = useState('culture')
     
@@ -52,9 +60,10 @@ const Mieten = ({ locale, content, global }) => {
             exit={{ opacity: 0 }}
         >
             <LayoutComponent>
-                <TitleComponent url={infoTitleUrl} id="info"/>
+                {/* <TitleComponent url={infoTitleUrl} id="info"/>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(infoContent) }}></SectionStyles>
-                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(infoContent) }}></SectionStyles>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(infoContent) }}></SectionStyles> */}
+                <FlexibleContentComponent content={flexibleContentRent1} />
                 <TitleComponent url={occupancyTitleUrl} id="occupancy"/>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(occupancyContent) }}></SectionStyles>
                 <SectionStyles>
@@ -79,8 +88,9 @@ const Mieten = ({ locale, content, global }) => {
                         </div> */}
                     </CalendarContainerStyles>
                 </SectionStyles>
-                <TitleComponent url={termsTitleUrl} id="terms"/>
-                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(termsContent) }}></SectionStyles>
+                {/* <TitleComponent url={termsTitleUrl} id="terms"/>
+                <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(termsContent) }}></SectionStyles> */}
+                <FlexibleContentComponent content={flexibleContentRent2} />
                 <TitleComponent url={downloadTitleUrl} id="download"/>
                 <DownloadsStyles>
                     { downloads.map( ( download, i ) => (

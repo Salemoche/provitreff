@@ -40,3 +40,11 @@ export const ContentStyles = styled('div')`
 export const SectionStyles = styled('div')`
     margin-bottom: ${ props => props.theme.sizes.M }px
 `
+
+export const TableStyles = styled('table')`
+    margin-bottom: ${ props => props.theme.sizes.M }px;
+
+    td {
+        border: none;
+    }
+`
