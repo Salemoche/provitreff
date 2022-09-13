@@ -23,8 +23,8 @@ function TitleComponent({ url, link = null, isMain = false }) {
     return ( 
         <TitleStyles className="provi-title" isMain={isMain}>
             <motion.img
-                initial={{ width: 'auto'}}
-                whileHover={{ width: '100%' }}     
+                // initial={{ width: 'auto'}}
+                // whileHover={{ width: '100%' }}     
                 ref={imageRef}
                 src={ url } alt="" 
                 onClick={scrollToTitle}

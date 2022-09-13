@@ -53,13 +53,17 @@ export default createGlobalStyle`
         min-height: 100vh;
     }
 
-    h1,
+    h1 {
+        margin: 0;
+    }
+
     h2,
     h3,
     h4,
     h5,
     h6 {
         margin: 0;
+        ${ props => getFontSize( 'L', props )}
     }
 
     p {

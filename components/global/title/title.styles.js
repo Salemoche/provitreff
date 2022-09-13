@@ -5,27 +5,31 @@ export const TitleStyles = styled('div')`
     max-width: 100%;
     display: flex;
     justify-content: center;
-    height: 80px;
+    /* height: 120px; */
+    height: auto;
     margin-bottom: ${ props => props.theme.sizes.M }px;
     cursor: pointer;
 
-    ${ props => {
+    /* ${ props => {
         if (props.isMain) {
             return css`
                 height: 110px;
             `
         }
-    } };
+    } }; */
     
 
     img {
-        height: 100%;
-        width: auto;
+        /* height: 100%;
+        width: auto; */
+        width: 100%;
+        height: auto;
+        max-width: ${ props => props.theme.sizes.contentWidth }px;
     }
 
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
-        height: 60px;
+        /* height: 60px; */
         justify-content: flex-start;
 
         /* ${ props => {
