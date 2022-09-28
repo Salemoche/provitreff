@@ -37,7 +37,7 @@ export const ContentStyles = styled('div')`
         padding-left: ${ props => props.theme.sizes.S }px;
         padding-right: ${ props => props.theme.sizes.S }px;
         padding-bottom: ${ props => props.theme.sizes.S }px;
-        padding-top: 24vw;
+        padding-top: 8vw;
     }
 `
 

@@ -17,6 +17,7 @@ export const HeaderStyles = styled('header')`
 
         .provi-title {
             margin-top: 0;
+            margin-bottom:  ${ props => props.theme.sizes.M }px;
         }
 
     nav {
@@ -24,6 +25,9 @@ export const HeaderStyles = styled('header')`
         max-width: 100%;
         ${ props => getFontSize( 'L', props )};
         position: relative;
+        overflow: hidden;
+        padding-top: 2px;
+        padding-bottom: 2px;
         
         ul {
             display: flex;
@@ -86,7 +90,7 @@ export const HeaderStyles = styled('header')`
                 if ( props.active ) {
                     return css`
                         opacity: 1;
-                        max-height: calc( 100vh - 90px );
+                        max-height: 100%;
                         padding-bottom:  ${ props => props.theme.sizes.S }px;
                     `
                 }
