@@ -10,6 +10,7 @@ export const DownloadsStyles = styled(SectionStyles)`
 export const CalendarTitlesStyles = styled('div')`
     display: flex;
     justify-content: center;
+    ${ props => getFontSize( 'L', props )};
 `
 
 export const CalendarTitleStyles = styled('h3')`
@@ -17,7 +18,7 @@ export const CalendarTitleStyles = styled('h3')`
     cursor: pointer;
     display: inline-block;
     text-transform: uppercase;
-    margin-bottom: ${ props => props.theme.sizes.S }px;
+    margin-bottom: ${ props => props.theme.sizes.M }px;
     transition: .1s;
 
     &:hover {
@@ -49,31 +50,78 @@ export const CalendarTitleStyles = styled('h3')`
 `
 
 export const CalendarContainerStyles = styled('div')`
-    /* display: flex; */
+    display: flex;
+    align-items: flex-end;
     gap: ${ props => props.theme.sizes.S }px;
     
     width: 100%;
 
-    .provi-calendar-container {
-        width: 100%;
+    .provi-calendar-container,
+    thead {
+        width: 70%;
 
         iframe {
             width: 100%;
         }
     }
 
-    /* .provi-calendar-tooltips {
-        width: 25%;
-
+    .provi-calendar-tooltips {
+        width: 30%;
+        /* padding-right: ${ props => props.theme.sizes.S }px; */
+        /* flex: 1; */
 
         .provi-calendar-tooltips__title {
-            margin-bottom: ${ props => props.theme.sizes.S }px;
         }
 
         .provi-calendar-tooltip {
             border: 3px solid black;            
-            margin-bottom: ${ props => props.theme.sizes.S }px;
+            margin-top: ${ props => props.theme.sizes.S }px;
             padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.XS }px;
+
+            &.occupied {
+                background: rgba(0, 0, 0, 0.5)
+            }
+
+            &.reserved {
+                background: rgba(0, 0, 0, 0.25)
+            }
         }
-    } */
+    }
+
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+        flex-wrap: wrap;
+
+        .provi-calendar-container,
+        thead {
+            width: 100%;
+
+            iframe {
+                width: 100%;
+            }
+        }
+
+        .provi-calendar-tooltips {
+
+            .provi-calendar-tooltips__title {
+                width: 100%;
+            }
+
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+
+            .provi-calendar-tooltip {
+                margin-right: ${ props => props.theme.sizes.S }px;
+                margin-top: ${ props => props.theme.sizes.XS }px;
+                flex: 1;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
 `

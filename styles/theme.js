@@ -19,11 +19,34 @@ const theme = {
         XXL: 256,
     },
     fontSizes: {
-        XS: [20, 1],
-        S: [24, 1],
-        M: [30, 1.25],
-        L: [42, 0.7],
-        XL: [48, 1],
+        XS: {
+            unit: 'px',
+            fontSize: 20,
+            lineHeight: 1.2, 
+            letterSpacing: 0.4,
+        },
+        S: {
+            unit: 'px',
+            fontSize: 24,
+            lineHeight: 1
+        },
+        M: {
+            unit: 'px',
+            fontSize: 30,
+            lineHeight: 1.25,
+            letterSpacing: 0.6,
+        },
+        L: {
+            unit: 'px',
+            fontSize: 42,
+            lineHeight: 0.7,
+            letterSpacing: 0.47
+        },
+        XL: {
+            unit: 'px',
+            fontSize: 48,
+            lineHeight: 1
+        },
     }
 }
 

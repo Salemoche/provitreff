@@ -7,7 +7,8 @@ export const TitleStyles = styled('div')`
     justify-content: center;
     /* height: 120px; */
     height: auto;
-    margin-bottom: ${ props => props.theme.sizes.M }px;
+    /* margin-bottom: ${ props => props.theme.sizes.M }px; */
+    margin-top: ${ props => props.theme.sizes.L }px;
     cursor: pointer;
 
     /* ${ props => {
@@ -17,34 +18,63 @@ export const TitleStyles = styled('div')`
             `
         }
     } }; */
+
+    /* &:nth-child(1) {
+        margin-top: 0;
+    } */
     
 
-    img {
+    .provi-title-image {
         /* height: 100%;
         width: auto; */
         width: 100%;
         height: auto;
         max-width: ${ props => props.theme.sizes.contentWidth }px;
+        position: relative;
+        z-index: 1;
+
+
+        &-hover {
+            position: absolute;
+            z-index: 0;
+        }
+    }
+
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+
+        .provi-title-image {
+            width: auto !important;
+            object-position: left;
+            opacity: 1 !important;
+
+            &-hover {
+                display: none;
+            }
+        }
     }
 
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
-        /* height: 60px; */
         justify-content: flex-start;
 
-        /* ${ props => {
-            if (!props.isMain) {
-                return css`
-                `
-            }
-        } }; */
+        .provi-title-image {
 
-        img {
-            width: auto !important;
+            max-width: calc( 100% - ${ props => props.theme.sizes.M }px - 8vw) !important;
+
+            /* width: auto !important;
             object-position: left;
             /* width: 100%;
             height: auto;
             max-width: 100%; */
+        }
+    }
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.S }px) {
+
+        .provi-title-image {
+
+            max-width: calc( 100% - ${ props => props.theme.sizes.S }px - 8vw) !important;
         }
     }
 `

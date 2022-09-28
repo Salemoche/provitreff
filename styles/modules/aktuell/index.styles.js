@@ -7,13 +7,13 @@ export const ProgramStyles = styled(SectionStyles)`
     margin-bottom: 0;
 
     .month {
-        margin-bottom: ${ props => props.theme.sizes.L }px;
+        /* margin-bottom: ${ props => props.theme.sizes.L }px; */
     }
 
     h2 {
         ${ props => getFontSize( 'L', props )};
         text-transform: uppercase;
-        margin-bottom: ${ props => props.theme.sizes.M}px;
+        /* margin-bottom: ${ props => props.theme.sizes.M}px; */
     }
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {

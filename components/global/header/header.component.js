@@ -16,7 +16,8 @@ function HeaderComponent() {
 
     return (
         <HeaderStyles backgroundColor={snap?.global?.colors?.current} active={menuOpen}>
-            <TitleComponent url={snap?.global?.proviLogo} link={`/${locale}`} isMain={true} />
+            <TitleComponent url={snap?.global?.proviLogo} hoverUrl={snap?.global?.proviLogoHover} link={`/${locale}`} isMain={true} />
+            <br />
             <nav>
                 { locale === 'en' ?
                 

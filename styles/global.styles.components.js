@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getFontSize } from '../lib/helpers';
 
 export const ContentStyles = styled('div')`
     width: 100%;
@@ -22,6 +23,8 @@ export const ContentStyles = styled('div')`
     @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
         padding-left: ${ props => props.theme.sizes.L }px;
         padding-right: ${ props => props.theme.sizes.L }px;
+        padding-bottom: ${ props => props.theme.sizes.XL }px;
+        padding-top: 28vw;
         width: unset;
         max-width: 100%;
 
@@ -33,18 +36,33 @@ export const ContentStyles = styled('div')`
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
         padding-left: ${ props => props.theme.sizes.S }px;
         padding-right: ${ props => props.theme.sizes.S }px;
-        padding-top: ${ props => props.theme.sizes.navPaddingMedium }px;
+        padding-bottom: ${ props => props.theme.sizes.S }px;
+        padding-top: 24vw;
     }
 `
 
 export const SectionStyles = styled('div')`
-    margin-bottom: ${ props => props.theme.sizes.M }px
+    /* margin-bottom: ${ props => props.theme.sizes.L }px; */
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 `
 
-export const TableStyles = styled('table')`
-    margin-bottom: ${ props => props.theme.sizes.M }px;
+export const TableStyles = styled('div')`
 
-    td {
-        border: none;
+    h3 {
+        /* margin-bottom: ${ props => props.theme.sizes.M }px; */
+        ${ props => getFontSize( 'M', props )};
+
+    }
+
+    table {
+        margin-bottom: ${ props => props.theme.sizes.M }px;
+        width: 100%;
+
+        td {
+            border: none;
+        }
     }
 `

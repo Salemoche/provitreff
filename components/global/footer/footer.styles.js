@@ -9,6 +9,7 @@ export const FooterStyles = styled('footer')`
     justify-content: center;
     border-top: 3px solid black;
     background: ${ props => props.backgroundColor };
+    z-index: 10;
 
     a {
         transition: .1s;
@@ -39,7 +40,7 @@ export const FooterStyles = styled('footer')`
     }
 
 
-    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
         display: none;
     }
 

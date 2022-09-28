@@ -15,6 +15,7 @@ import TitleComponent from '../../components/global/title/title.component';
 import { SectionStyles } from '../../styles/global.styles.components';
 import { ContactStyles } from  '../../styles/modules/provi/index.styles';
 import { cleanHTML } from '../../lib/helpers';
+import ImageSliderComponent from '../../components/global/image-slider/image-slider.component';
 // Helpers
 
 const Provi = ({ locale, content, global }) => {
@@ -24,11 +25,14 @@ const Provi = ({ locale, content, global }) => {
     
     const conceptContent = content?.proviEntries[0]?.conceptContent || '';
     const conceptTitleUrl = content?.proviEntries[0]?.conceptTitle[0]?.url || '';
+    const conceptTitleUrlHover = content?.proviEntries[0]?.conceptTitleHover[0]?.url || '';
     const contactContent = content?.proviEntries[0]?.contactContent || '';
     const contactTitleUrl = content?.proviEntries[0]?.contactTitle[0]?.url || '';
+    const contactTitleUrlHover = content?.proviEntries[0]?.contactTitleHover[0]?.url || '';
     const historyContent = content?.proviEntries[0]?.historyContent || '';
     const historyTitleUrl = content?.proviEntries[0]?.historyTitle[0]?.url || '';
-
+    const historyTitleUrlHover = content?.proviEntries[0]?.historyTitleHover[0]?.url || '';
+    const images = content?.proviEntries[0]?.imageSlider || '';
     
 	return (
         <motion.div
@@ -39,12 +43,19 @@ const Provi = ({ locale, content, global }) => {
             exit={{ opacity: 0 }}
         >
             <LayoutComponent>
-                <TitleComponent url={conceptTitleUrl} id="concept"/>
+                <TitleComponent url={conceptTitleUrl} hoverUrl={conceptTitleUrlHover} id="concept"/>
+                <br />
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(conceptContent) }}></SectionStyles>
-                <TitleComponent url={contactTitleUrl} id="contact"/>
+                <br/><br/>
+                <TitleComponent url={contactTitleUrl} hoverUrl={contactTitleUrlHover} id="contact"/>
+                <br />
                 <ContactStyles dangerouslySetInnerHTML={{__html: cleanHTML(contactContent) }}></ContactStyles>
-                <TitleComponent url={historyTitleUrl} id="history"/>
+                <TitleComponent url={historyTitleUrl} hoverUrl={historyTitleUrlHover} id="history"/>
+                <br />
+                <ImageSliderComponent images={images} />
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(historyContent) }}></SectionStyles>
+                    
+                <br/><br/>
             </LayoutComponent>
         </motion.div>
 	)

@@ -15,6 +15,10 @@ export const HeaderStyles = styled('header')`
     padding:  ${ props => props.theme.sizes.S }px;
     z-index: 10;
 
+        .provi-title {
+            margin-top: 0;
+        }
+
     nav {
         width: ${ props => props.theme.sizes.contentWidth }px;
         max-width: 100%;
@@ -32,14 +36,39 @@ export const HeaderStyles = styled('header')`
         }
     }
 
-    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+
+        padding-left: 0;
+        padding-right: 0;
 
         .provi-title {
-            margin-bottom: 0;
+            padding-left: ${ props => props.theme.sizes.L }px;
+            padding-right: ${ props => props.theme.sizes.L }px;
 
-            img {
-                max-width: calc( 100% - ${ props => props.theme.sizes.M }px - 40px)
+            .provi-title-image {
+                max-width: 100%;
             }
+
+            /* img.provi-title-image-hover {
+                max-width: calc( 100% - 2* ${ props => props.theme.sizes.L }px)
+            } */
+        }
+
+        nav {
+            width: 100%;
+            padding-left: ${ props => props.theme.sizes.L }px;
+            padding-right: ${ props => props.theme.sizes.L }px;
+        }
+    }
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+
+        padding-left: ${ props => props.theme.sizes.S }px;
+        padding-right: ${ props => props.theme.sizes.S }px;
+
+        .provi-title {
+            padding: 0;
+            margin-bottom: 0;
         }
 
         nav {
@@ -111,11 +140,11 @@ export const MenuItemStyles = styled('a')`
 
 export const BurgerStyles = styled('div')`
 
-    width: 35px;
-    height: 40px;
+    width: 10vw;
+    height: 10vw;
     position: absolute;
     right: ${ props => props.theme.sizes.S }px;
-    top: ${ props => props.theme.sizes.S }px;
+    top: calc(24px + 1vw);
     cursor pointer;
     display: none;
     
@@ -130,7 +159,13 @@ export const BurgerStyles = styled('div')`
         }
     } };
 
-    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
-        display: inherit;
-    }
+@media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+    display: inherit;
+}
+
+@media screen and ( max-width: ${ props => props.theme.breakpoints.S }px) {
+    width: 9vw;
+    height: 9vw;
+    top: calc(20px + 1vw);
+}
 `

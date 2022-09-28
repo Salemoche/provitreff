@@ -31,14 +31,14 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Rodger';
+    }
+
+    body {
         ${ props => getFontSize( 'M', props )}
 
         @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
             ${ props => getFontSize( 'XS', props )};
         }
-    }
-
-    body {
     }
 
     ul, 
@@ -68,7 +68,11 @@ export default createGlobalStyle`
 
     p {
         margin: 0;
-        margin-bottom: ${ props => props.theme.sizes.S }px
+        margin-bottom: ${ props => props.theme.sizes.S }px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
     }
 
     pre {
@@ -152,13 +156,13 @@ export default createGlobalStyle`
     }
 
     .fc-today-button {
-        margin-right: ${ props => props.theme.sizes.XS }px;
+        margin-left: ${ props => props.theme.sizes.XS }px;
     }
 
     .fc-next-button,
     .fc-prev-button {
         ${'' /* padding: ${ props => props.theme.sizes.XS }px; */}
-        margin-right: ${ props => props.theme.sizes.XS }px;
+        margin-left: ${ props => props.theme.sizes.XS }px;
         ${'' /* margin-bottom: ${ props => props.theme.sizes.XS }px; */}
         cursor: pointer;
         padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.S }px;
@@ -169,7 +173,7 @@ export default createGlobalStyle`
         ${'' /* background: green; */}
 
         &:before {
-            content: '<'
+            content: '<';
         }
     }
 
@@ -178,18 +182,44 @@ export default createGlobalStyle`
         ${'' /* background: green; */}
 
         &:before {
-            content: '>'
+            content: '>';
+        }
+    }
+
+    .fc-toolbar:nth-of-type(1) {
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: ${ props => props.theme.sizes.contentWidth }px;
+
+        ${'' /* Month */}
+        .fc-toolbar-chunk:nth-of-type(1) {
+            h2 {
+                line-height: 1;
+                ${ props => getFontSize( 'M', props )};
+
+            }
+        }
+
+        ${'' /* Buttons */}
+        .fc-toolbar-chunk:nth-of-type(3) {
         }
     }
 
     .fc-view-harness {
 
+        ${ props => getFontSize( 'S', props )};
         margin-top: ${ props => props.theme.sizes.XS }px;
 
         table {
             width: 100%;
             table-layout: fixed;
             border-collapse: collapse;
+
+            ${'' /* tr {
+                height: calc( ${ props => props.theme.sizes.contentWidth}px * 0.75 / 10.5 );
+            } */}
 
             th {
                 text-align: left;
@@ -198,9 +228,12 @@ export default createGlobalStyle`
             td {
                 border: 3px solid black;
                 vertical-align: baseline;
+                position: relative;
+                padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.XS }px;
 
                 &[role=presentation] {
                     border: none;
+                    padding: 0;
                 }
 
                 > div {
@@ -209,5 +242,31 @@ export default createGlobalStyle`
             }
         }
 
+    }
+
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+
+        ${ props => getFontSize( 'XS', props )};
+
+        .fc-toolbar:nth-of-type(1) {
+            width: calc( 100vw - (2 * ${ props => props.theme.sizes.L }px));
+        }
+
+        .fc-view-harness {
+            table {
+                tr {
+                    height: calc( 75vw / 10.5 );
+                }
+            }
+
+        }
+    }
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+
+        .fc-toolbar:nth-of-type(1) {
+            width: calc( 100vw - (2 * ${ props => props.theme.sizes.S }px));
+        }
     }
 `

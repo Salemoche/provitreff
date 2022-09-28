@@ -23,6 +23,7 @@ const Home = ({ locale, content, global }) => {
     useSetGlobals( global );
     
     const programTitleUrl = content?.currentEntries[0]?.programTitle[0]?.url;
+    const programTitleUrlHover = content?.currentEntries[0]?.programTitleHover[0]?.url;
     const program = content?.currentEntries[0]?.program;
 
 	return (
@@ -34,11 +35,13 @@ const Home = ({ locale, content, global }) => {
             exit={{ opacity: 0 }}
         >
             <LayoutComponent>
-                <TitleComponent url={programTitleUrl}/>
+                <TitleComponent url={programTitleUrl} hoverUrl={programTitleUrlHover}/>
+                <br />
                 <ProgramStyles>
                     { program.map( month => (
                         <div className="month" key={month.month} id={month.month}>
                             <h2>{ month.month }</h2>
+                            <br />
 
                             { month.selected_events.map( event => (
                                 <EventStyles key={event.title}>
@@ -48,6 +51,7 @@ const Home = ({ locale, content, global }) => {
                                     { event.eventTags && <div>{ event.eventTags }</div> }
                                 </EventStyles>
                             ))}
+                            <br />
                         </div>
                     ))}
                 </ProgramStyles>
