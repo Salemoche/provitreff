@@ -43,6 +43,8 @@ export const TitleStyles = styled('div')`
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
 
+        margin-top: 14vw;
+
         .provi-title-image {
             width: auto !important;
             object-position: left;

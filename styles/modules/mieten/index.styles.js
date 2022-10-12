@@ -52,21 +52,33 @@ export const CalendarTitleStyles = styled('h3')`
 export const CalendarContainerStyles = styled('div')`
     display: flex;
     align-items: flex-end;
-    gap: ${ props => props.theme.sizes.S }px;
+    /* gap: ${ props => props.theme.sizes.S }px; */
+    position: relative;
     
     width: 100%;
 
     .provi-calendar-container,
     thead {
-        width: 70%;
+        width: 100%;
 
         iframe {
             width: 100%;
         }
     }
 
+    &:hover {
+        .provi-calendar-tooltips {
+            opacity: 1;
+        }
+    }
+
     .provi-calendar-tooltips {
         width: 30%;
+        position: absolute;
+        left: calc( 100% + ${ props => props.theme.sizes.S }px);
+        opacity: 0;
+        transition: .3s;
+        pointer-events: none;
         /* padding-right: ${ props => props.theme.sizes.S }px; */
         /* flex: 1; */
 
@@ -102,15 +114,16 @@ export const CalendarContainerStyles = styled('div')`
         }
 
         .provi-calendar-tooltips {
+            position: static;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
 
             .provi-calendar-tooltips__title {
                 width: 100%;
             }
 
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
 
 
             .provi-calendar-tooltip {

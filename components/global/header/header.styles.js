@@ -32,6 +32,10 @@ export const HeaderStyles = styled('header')`
         ul {
             display: flex;
             justify-content: space-between;
+            
+            .provi-navigation-language-switcher {
+                display: none;
+            }
         }
 
         .provi-navigation-info {
@@ -77,7 +81,7 @@ export const HeaderStyles = styled('header')`
 
         nav {
             ${ props => getFontSize( 'M', props )};
-            height: calc( 100vh - 90px );
+            height: calc( 100vh - 18vw );
             max-height: 0;
             opacity: 0;
             transition: .3s;
@@ -108,12 +112,26 @@ export const HeaderStyles = styled('header')`
                 li {
                     margin-bottom:  ${ props => props.theme.sizes.M }px;
                 }
+            
+                .provi-navigation-language-switcher {
+                    display: inherit;
+                }
             }
 
             .provi-navigation-info {
                 margin-top: auto;
                 display: flex;
                 align-items: center;
+            }
+        }
+    }
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.S }px) {
+
+        nav {
+            height: calc( 100vh - 18vw );
+            .provi-navigation-info {
+                align-items: flex-start;
             }
         }
     }

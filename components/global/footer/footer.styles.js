@@ -40,6 +40,11 @@ export const FooterStyles = styled('footer')`
     }
 
 
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+        padding-left: ${ props => props.theme.sizes.L }px;
+        padding-right: ${ props => props.theme.sizes.L }px;
+    }
+
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
         display: none;
     }

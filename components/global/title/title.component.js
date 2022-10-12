@@ -29,7 +29,7 @@ function TitleComponent({ url, hoverUrl, link = null, isMain = false }) {
             <motion.img
                 // initial={{ width: 'auto'}}
                 whileHover={{ opacity: 0 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: .3 }}
                 ref={imageRef}
                 src={ url } alt="" 
                 onClick={scrollToTitle}

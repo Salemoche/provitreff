@@ -37,12 +37,14 @@ const CalendarComponent = ({ calendarId, locale }) => {
         const description = eventInfo.event.extendedProps.description;
         let isReserved = false;
 
+        console.log(eventInfo.event, description)
+
         if ( description?.match(/res/gi)) {
             isReserved = true;
         }
 
         return (
-            <CalendarEventStyles isReserved={isReserved} className="provi-event-content">{ /*isReserved ? 'o' : 'x'*/ }</CalendarEventStyles>
+            <CalendarEventStyles style={{ pointerEvents: 'none'}}isReserved={isReserved} className="provi-event-content">{ /*isReserved ? 'o' : 'x'*/ }</CalendarEventStyles>
         )
     }
 

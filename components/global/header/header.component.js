@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { HeaderStyles, MenuItemStyles, BurgerStyles } from './header.styles'
 import TitleComponent from '../title/title.component';
-import { Link } from 'next/link';
+import Link from 'next/link';
 import { useSnapshot } from 'valtio';
 import { state } from '../../../lib/state';
 import { useRouter } from 'next/router';
+import { LanguageSwitcherStyles } from '../footer/footer.styles';
 
 function HeaderComponent() {
     const snap = useSnapshot(state);
@@ -30,6 +31,11 @@ function HeaderComponent() {
                         <li>
                             <MenuItemStyles href="/en/provi" currentMenuItem={router.pathname == "/provi"}>Provi</MenuItemStyles>
                         </li>
+                        <li className="provi-navigation-language-switcher">
+                            <Link className="provi-de" href="" locale="de">
+                                <LanguageSwitcherStyles className="provi-hover-text" currentLanguage={locale == "de"}>DE</LanguageSwitcherStyles>
+                            </Link>
+                        </li>
                     </ul>
                 :
 
@@ -43,11 +49,17 @@ function HeaderComponent() {
                     <li>
                         <MenuItemStyles href="/provi" currentMenuItem={router.pathname == "/provi"}>Provi</MenuItemStyles>
                     </li>
+                    <li className="provi-navigation-language-switcher">
+                        <Link className="provi-en" href="" locale="en">
+                            <LanguageSwitcherStyles className="provi-hover-text" currentLanguage={locale == "en"}>EN</LanguageSwitcherStyles>
+                        </Link>
+                    </li>
                 </ul>
                 } 
                 <div className="provi-navigation-info">
-                    <a href={ global?.proviEmail }>{global?.proviEmail}</a>
                     <div dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
+                    {global?.proviNumber && <div>{ global?.proviNumber }</div>}
+                    <a href={ global?.proviEmail }>{global?.proviEmail}</a>
                 </div>
             </nav>
             <BurgerStyles onClick={() => { setMenuOpen(!menuOpen) }}>
