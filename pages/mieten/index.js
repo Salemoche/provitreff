@@ -82,9 +82,9 @@ const Mieten = ({ locale, content, global, calendars }) => {
                     <CalendarContainerStyles>
                         <div className="provi-calendar-container">
                             { currentCalendar == 'culture' ?
-                                <CalendarComponent calendars={[ calendars.calendarCulture ]} locale={locale} />
+                                <CalendarComponent calendars={[ calendars.calendarCulture ]} locale={locale} mode="month"/>
                             :
-                                <CalendarComponent calendars={[ calendars.calendarMovement ]} locale={locale} />
+                                <CalendarComponent calendars={[ calendars.calendarMovement ]} locale={locale} mode="week"/>
                             }
                         </div>
                         <div className="provi-calendar-tooltips">
