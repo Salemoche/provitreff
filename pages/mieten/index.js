@@ -29,7 +29,7 @@ const CalendarComponent = dynamic( () => import('../../components/rent/calendar/
 });
 
 
-const Mieten = ({ locale, content, global }) => {
+const Mieten = ({ locale, content, global, calendars }) => {
 
     const snap = useSnapshot(state);
     useSetGlobals( global );
@@ -82,9 +82,9 @@ const Mieten = ({ locale, content, global }) => {
                     <CalendarContainerStyles>
                         <div className="provi-calendar-container">
                             { currentCalendar == 'culture' ?
-                                <CalendarComponent calendarId={ cultureCalendar } locale={locale} />
+                                <CalendarComponent calendars={[ calendars.calendarCulture ]} locale={locale} />
                             :
-                                <CalendarComponent calendarId={ movementCalendar } locale={locale} />
+                                <CalendarComponent calendars={[ calendars.calendarMovement ]} locale={locale} />
                             }
                         </div>
                         <div className="provi-calendar-tooltips">
@@ -114,11 +114,64 @@ const Mieten = ({ locale, content, global }) => {
 export default Mieten;
 
 
-export const getStaticProps = async(locale) => {
+// export const getStaticProps = async(locale) => {
+
+//     let language = 'default'
+
+//     switch (locale.locale) {
+//         case 'en':
+//             language = 'english'
+//             break;
+//     }
+
+//     const contentData = await apolloClient.query({
+//         query: MIETEN_QUERY(),
+//         variables: {
+//             language: language
+//         }
+//     });
+
+//     const globalData = await apolloClient.query({
+//         query: GLOBAL_QUERY()
+//     });
+
+    
+//     const content = contentData.data;
+//     const global = globalData.data;
+    
+//     return {
+//         props: {
+//             locale,
+//             content,
+//             global
+//         }
+//     }
+// } 
+
+const fetchCalendar = async ( id, apiKey ) => {
+
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?key=${apiKey}`;
+
+    const response = await fetch(
+        url,
+        {
+            method: 'GET'
+        }
+    )
+
+    const data = await response.json();
+    return data
+}
+
+
+export async function getServerSideProps(context) {
+
+    const calendarCulture = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE, process.env.NEXT_CAL_API );
+    const calendarMovement = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT, process.env.NEXT_CAL_API );
 
     let language = 'default'
 
-    switch (locale.locale) {
+    switch (context.locale) {
         case 'en':
             language = 'english'
             break;
@@ -141,9 +194,13 @@ export const getStaticProps = async(locale) => {
     
     return {
         props: {
-            locale,
+            locale: context.locale,
             content,
-            global
+            global,
+            calendars: {
+                calendarMovement,
+                calendarCulture
+            }
         }
     }
-}  
+}

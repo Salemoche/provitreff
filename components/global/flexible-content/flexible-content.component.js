@@ -9,7 +9,7 @@ const FlexibleContentComponent = ({ content }) => {
         <>   
             { content.map( ( section, i ) => {
                 if ( section.typeHandle == 'sectionTitle' ) {
-                    return <><TitleComponent url={ section.sectionTitle[0].url } hoverUrl={ section.sectionTitleHover[0].url } id="download" key={`title-${i}`}/><br /></>
+                    return <div key={`section-title-${i}`}><TitleComponent url={ section.sectionTitle[0].url } hoverUrl={ section.sectionTitleHover[0].url } id="download" key={`title-${i}`}/><br /></div>
                 } else if ( section.typeHandle == 'standardContent' ) {
                     return (
                         <ContentStyles className="provi-content" key={`content-${i}`} isOnlyTitle={section.subtitle && !section.text}>

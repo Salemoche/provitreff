@@ -1,70 +1,43 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion';
-import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import googleCalendarPlugin from '@fullcalendar/google-calendar' // a plugin!
-import deLocale from '@fullcalendar/core/locales/de'
 import { useSnapshot } from 'valtio';
 import { state } from '../../../lib/state';
 import { CalendarEventStyles } from './calendar.styles';
 
-const CalendarComponent = ({ calendarId, locale }) => {
+const CalendarComponent = ({ calendars, locale, calendarData }) => {
+
+    // const [calendarData, setCalendarData] = useState(null)
+
+
+    // const getCalendarData = async () => {
+
+    //     const url = `https://www.googleapis.com/calendar/v3/calendars/${process.env.NEXT_CAL_ID}/events?key=${process.env.NEXT_CAL_API}`;
+
+    //     const response = await fetch(
+    //         url,
+    //         {
+    //             method: 'GET'
+    //         }
+    //     )
+
+    //     const data = await response.json();
+    //     setCalendarData(data)
+    // }
         
-    const calendarRef = useRef();
-
-    const calculateRowHeight = () => {
-        const calendarRows = calendarRef.current.querySelector('.fc-scrollgrid-section-body').querySelectorAll('tr');
-
-        calendarRows.forEach(row => {
-            // Set To 3/2 Ratio
-            row.style.height = row.offsetWidth / 10.5 + 'px';
-        });
-    }
-
     useEffect(() => {
-        calculateRowHeight();
-    }, [ calendarRef.current ])
-
-    useEffect(() => {
-        window.addEventListener('resize', calculateRowHeight)
-        return () => {
-            window.removeEventListener('resize', calculateRowHeight)  
-        }
+        // getCalendarData()
+        console.log(calendars)
     }, [])
-    
-
-    const renderEventContent = (eventInfo) => {
-        const description = eventInfo.event.extendedProps.description;
-        let isReserved = false;
-
-        console.log(eventInfo.event, description)
-
-        if ( description?.match(/res/gi)) {
-            isReserved = true;
-        }
-
-        return (
-            <CalendarEventStyles style={{ pointerEvents: 'none'}}isReserved={isReserved} className="provi-event-content">{ /*isReserved ? 'o' : 'x'*/ }</CalendarEventStyles>
-        )
-    }
+        
+    // useEffect(() => {
+    //     console.log(calendarData, process.env.NEXT_CAL_ID)
+    // }, [calendarData])
 
     return (
         <motion.div
-            className="provi-calendar provi-calendar-culture"                
-            ref={ calendarRef }
+            className="provi-calendar provi-calendar-culture"    
         >
-            {/* <div dangerouslySetInnerHTML={{ __html: calendar }}></div> */}
-
-            <FullCalendar
-                plugins={[ dayGridPlugin, googleCalendarPlugin ]}
-                googleCalendarApiKey='AIzaSyCG2fd5-5bIw70I0Kk__iwE_51kNY5UIsU'
-                events={{ googleCalendarId: calendarId }}
-                initialView="dayGridMonth"
-                height='auto'
-                locales={[ deLocale ]}
-                locale={ locale.locale }
-                eventContent={ renderEventContent }
-            />
+            This is the new calendar!
         </motion.div>
     )
 }

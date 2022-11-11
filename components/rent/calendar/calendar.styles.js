@@ -11,9 +11,9 @@ export const CalendarEventStyles = styled('div')`
     padding-top: 30%;
     /* z-index: -1; */
 
-    ${ props => {
+    /* ${ props => {
         return props.isReserved ? 'background: rgba(0, 0, 0, 0.25)' :  'background: rgba(0, 0, 0, 0.5)'
-    }}
+    }} */
 
     
 `
