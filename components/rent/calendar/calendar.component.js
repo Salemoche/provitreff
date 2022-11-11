@@ -6,7 +6,7 @@ import { CalendarEventStyles, MonthLayoutStyles, WeekLayoutStyles } from './cale
 
 const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }) => {
 
-    const daysOfMonth = () => {
+    const daysOfCurrentMonth = () => {
 
         const days = []
 
@@ -30,7 +30,7 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }
     const daysOfNextMonth = () => {
 
         const days = []
-        const remainingDays = 35 - (daysOfMonth().length + daysOfLastMonth().length);
+        const remainingDays = 35 - (daysOfCurrentMonth().length + daysOfLastMonth().length);
 
         for ( let i = 1 ; i <= remainingDays; i++ ){
             days.push(i);
@@ -47,21 +47,39 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }
             </div>
             <div className="bs-calendar-days">
                 <div className="bs-calendar-days-heading">
-                    { calendar.names[locale].days.map( day => <div className="bs-calendar-day bs-calendar-days-heading-item"><span>{day}</span></div> ) }
+                    { calendar.names[locale].days.map( ( day, i ) => <div key={`bs-calendar-day-${i}`} className="bs-calendar-day bs-calendar-days-heading-item"><span>{day}</span></div> ) }
                 </div>
                 <div className="bs-calendar-days-dates">
                     { daysOfLastMonth().map( ( day, i ) => (
-                        <div key={`bs-calendar-day-prev-${i}`} className={`bs-calendar-day bs-calendar-days-dates-item-0${day} inactive`}>
+                        <div 
+                            key={`bs-calendar-day-prev-${i}`} 
+                            className={`bs-calendar-day bs-calendar-days-dates-item-0${day} inactive`}
+                            day={ day }
+                            month={ calendar.currentMonth + 1 }
+                            year={ calendar.currentYear }
+                        >
                             <span>{day < 10 && 0}{day}</span>
                         </div>
                     ))}
-                    { daysOfMonth().map( ( day, i ) => (
-                        <div key={`bs-calendar-day-current-${i}`} className={`bs-calendar-day bs-calendar-days-dates-item-0${day}`}>
+                    { daysOfCurrentMonth().map( ( day, i ) => (
+                        <div 
+                            key={`bs-calendar-day-current-${i}`} 
+                            className={`bs-calendar-day bs-calendar-days-dates-item-0${day}`}
+                            day={ day }
+                            month={ calendar.currentMonth + 1 }
+                            year={ calendar.currentYear }
+                        >
                             <span>{day < 10 && 0}{day}</span>
                         </div>
                     ))}
                     { daysOfNextMonth().map( ( day, i ) => (
-                        <div key={`bs-calendar-day-next-${i}`} className={`bs-calendar-day bs-calendar-days-dates-item-0${day} inactive`}>
+                        <div 
+                            key={`bs-calendar-day-next-${i}`} 
+                            className={`bs-calendar-day bs-calendar-days-dates-item-0${day} inactive`}
+                            day={ day }
+                            month={ calendar.currentMonth + 1 }
+                            year={ calendar.currentYear }
+                        >
                             <span>{day < 10 && 0}{day}</span>
                         </div>
                     ))}
@@ -177,7 +195,7 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
     }, [])
         
     useEffect(() => {
-        console.log( calendar.lastDayOfMonth )
+        console.log( calendars.reserved )
     }, [calendar])
 
     return (

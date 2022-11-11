@@ -82,9 +82,9 @@ const Mieten = ({ locale, content, global, calendars }) => {
                     <CalendarContainerStyles>
                         <div className="provi-calendar-container">
                             { currentCalendar == 'culture' ?
-                                <CalendarComponent calendars={[ calendars.calendarCulture ]} locale={locale} mode="month"/>
+                                <CalendarComponent calendars={{ reserved: calendars.calendarCultureReserved, fixed: calendars.calendarCultureFixed }} locale={locale} mode="month"/>
                             :
-                                <CalendarComponent calendars={[ calendars.calendarMovement ]} locale={locale} mode="week"/>
+                                <CalendarComponent calendars={{ reserved: calendars.calendarMovementReserved, fixed: calendars.calendarMovementFixed }} locale={locale} mode="week"/>
                             }
                         </div>
                         <div className="provi-calendar-tooltips">
@@ -166,8 +166,10 @@ const fetchCalendar = async ( id, apiKey ) => {
 
 export async function getServerSideProps(context) {
 
-    const calendarCulture = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE, process.env.NEXT_CAL_API );
-    const calendarMovement = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT, process.env.NEXT_CAL_API );
+    const calendarCultureReserved = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_RESERVED, process.env.NEXT_CAL_API );
+    const calendarCultureFixed = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_FIXED, process.env.NEXT_CAL_API );
+    const calendarMovementReserved = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_RESERVED, process.env.NEXT_CAL_API );
+    const calendarMovementFixed = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_FIXED, process.env.NEXT_CAL_API );
 
     let language = 'default'
 
@@ -198,8 +200,10 @@ export async function getServerSideProps(context) {
             content,
             global,
             calendars: {
-                calendarMovement,
-                calendarCulture
+                calendarCultureReserved,
+                calendarCultureFixed,
+                calendarMovementReserved,
+                calendarMovementFixed,
             }
         }
     }

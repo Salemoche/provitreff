@@ -9,7 +9,7 @@ const FlexibleContentComponent = ({ content }) => {
         <>   
             { content.map( ( section, i ) => {
                 if ( section.typeHandle == 'sectionTitle' ) {
-                    return <div key={`section-title-${i}`}><TitleComponent url={ section.sectionTitle[0].url } hoverUrl={ section.sectionTitleHover[0].url } id="download" key={`title-${i}`}/><br /></div>
+                    return <React.Fragment key={`section-title-${i}`}><TitleComponent url={ section.sectionTitle[0].url } hoverUrl={ section.sectionTitleHover[0].url } id="download" key={`title-${i}`}/><br /></React.Fragment>
                 } else if ( section.typeHandle == 'standardContent' ) {
                     return (
                         <ContentStyles className="provi-content" key={`content-${i}`} isOnlyTitle={section.subtitle && !section.text}>
@@ -23,8 +23,8 @@ const FlexibleContentComponent = ({ content }) => {
                     )
                 } else if ( section.typeHandle == 'table' ) {
                     return (
-                        <>
-                            <TableStyles className="provi-table" key={`table-${i}`}>
+                        <React.Fragment key={`table-${i}`}>
+                            <TableStyles className="provi-table">
                                 { section.tableHeader && <h3>{ section.tableHeader }</h3> }
                                 <table>
                                     <tbody>
@@ -37,7 +37,7 @@ const FlexibleContentComponent = ({ content }) => {
                                     </tbody>
                                 </table>
                             </TableStyles>
-                        </>
+                        </React.Fragment>
                     )
                 }
             })}
