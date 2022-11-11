@@ -4,7 +4,40 @@ import { useSnapshot } from 'valtio';
 import { state } from '../../../lib/state';
 import { CalendarEventStyles, MonthLayoutStyles, WeekLayoutStyles } from './calendar.styles';
 
-const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }) => {
+const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, handleTodayClick }) => {
+
+    const month = calendar.currentMonth + 1;
+    const year = calendar.currentYear;
+    const store = useSnapshot(state);
+
+    const parseCalendar = ( calendar ) => {
+        // Transform Start and End Date and DateTime into Date
+        const parseStartDate = ( start ) => {
+            if ( start.date ) return new Date( start.date );
+            if ( start.dateTime ) return new Date( start.dateTime );
+        }
+
+        return (
+            calendar?.items?.map( event => ({
+                ...event,
+                startDate: parseStartDate(event.start),
+                endDate: parseStartDate(event.end)
+            }) )
+        )
+    }
+
+    const compareEventsToDates = ( calendar, day ) => {
+
+        let isMatch
+
+        calendar.forEach( event => {
+            if ( event.startDate.getDate() == day && event.startDate.getMonth() + 1 == month && event.startDate.getFullYear() == year) {
+                isMatch = true
+            }
+        });
+
+        return isMatch;
+    }
 
     const daysOfCurrentMonth = () => {
 
@@ -14,7 +47,27 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }
             days.push(i)
         }
 
-        return days
+        return (
+            days.map( ( day, i ) => {
+
+                let isReserved = compareEventsToDates( parseCalendar(calendars.reserved), day)
+                let isFixed =compareEventsToDates( parseCalendar(calendars.fixed), day)
+
+                return (
+                    <a 
+                        key={`bs-calendar-day-current-${i}`} 
+                        className={`bs-calendar-day bs-calendar-days-dates-item-0${day} ${ isFixed && 'fixed' } ${ isReserved && 'reserved' }`}
+                        day={ day }
+                        month={ month }
+                        year={ year }
+                        href={ `mailto:${store.global.proviEmail}?subject=Reservation für den ${ day }. ${ calendar.names.de.months[month]} ${ year }&body=Hallo, ich würde gerne den Provitreff am ${ day }. ${ calendar.names.de.months[month]} ${ year } reservieren.` }
+                    >
+                        <span>{day < 10 && 0}{day}</span>
+                    </a>
+                )
+            })
+        )
+
     }
 
     const daysOfLastMonth = () => {
@@ -30,7 +83,8 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }
     const daysOfNextMonth = () => {
 
         const days = []
-        const remainingDays = 35 - (daysOfCurrentMonth().length + daysOfLastMonth().length);
+        const totalDaysUntilNextMonth = daysOfCurrentMonth().length + daysOfLastMonth().length;
+        const remainingDays = totalDaysUntilNextMonth > 35 ? 42 - totalDaysUntilNextMonth : 35 - totalDaysUntilNextMonth;
 
         for ( let i = 1 ; i <= remainingDays; i++ ){
             days.push(i);
@@ -41,9 +95,10 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }
     return(
         <MonthLayoutStyles>
             <div className="bs-calendar-header">
+                <button className="bs-calendar-header-today-button" onClick={handleTodayClick}>{ locale == 'en' ? 'today' : 'heute'}</button>
+                <div className="bs-calendar-header-button bs-calendar-header-button-prev"><button onClick={() => handleChangeMonth('prev')}>&lt;</button></div>
+                <div className="bs-calendar-header-button bs-calendar-header-button-next"><button onClick={() => handleChangeMonth('next')}>&gt;</button></div>
                 <h4>{ calendar.names[locale].months[calendar.currentMonth] } { calendar.currentYear }</h4>
-                <div className="bs-calendar-header-button bs-calendar-header-button-prev" onClick={() => handleChangeMonth('prev')}></div>
-                <div className="bs-calendar-header-button bs-calendar-header-button-next" onClick={() => handleChangeMonth('next')}></div>
             </div>
             <div className="bs-calendar-days">
                 <div className="bs-calendar-days-heading">
@@ -61,17 +116,7 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth }
                             <span>{day < 10 && 0}{day}</span>
                         </div>
                     ))}
-                    { daysOfCurrentMonth().map( ( day, i ) => (
-                        <div 
-                            key={`bs-calendar-day-current-${i}`} 
-                            className={`bs-calendar-day bs-calendar-days-dates-item-0${day}`}
-                            day={ day }
-                            month={ calendar.currentMonth + 1 }
-                            year={ calendar.currentYear }
-                        >
-                            <span>{day < 10 && 0}{day}</span>
-                        </div>
-                    ))}
+                    { daysOfCurrentMonth() }
                     { daysOfNextMonth().map( ( day, i ) => (
                         <div 
                             key={`bs-calendar-day-next-${i}`} 
@@ -171,7 +216,7 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
             newYear = calendar.currentMonth + 1 > 11 ? calendar.currentYear + 1 : calendar.currentYear;
 
         } else {
-            newMonth = calendar.currentMonth - 1 < 0 ? 12 : calendar.currentMonth - 1;
+            newMonth = calendar.currentMonth - 1 < 0 ? 11 : calendar.currentMonth - 1;
             newYear = calendar.currentMonth - 1 < 0 ? calendar.currentYear - 1 : calendar.currentYear;
         }
             
@@ -189,13 +234,30 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
         //     lastDateOfMonth: new Date( prev.currentYear, prev.currentMonth, 0 ).getDate()
         // })} )
     }
+
+    const changeToCurrentMonth = () => {
+            
+        return setCalendar( prev => { return ({
+            ...prev,
+            currentYear: date.getFullYear(),
+            currentMonth: date.getMonth(),
+            firstDayOfMonth: new Date( date.getFullYear(), date.getMonth(), 1 ).getDay(),
+            lastDateOfMonth: new Date( date.getFullYear(), date.getMonth() + 1, 0 ).getDate(),
+            lastDateOfLastMonth: new Date( date.getFullYear(), date.getMonth(), 0 ).getDate(),
+        })} )
+
+        // return setCalendar( prev => {({
+        //     ...prev,
+        //     lastDateOfMonth: new Date( prev.currentYear, prev.currentMonth, 0 ).getDate()
+        // })} )
+    }
         
     useEffect(() => {
         // console.log(calendar)
     }, [])
         
     useEffect(() => {
-        console.log( calendars.reserved )
+        console.log( calendars.reserved, calendars.fixed )
     }, [calendar])
 
     return (
@@ -203,9 +265,9 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
             className="provi-calendar provi-calendar-culture"    
         >
             { mode == 'month' ? 
-                <MonthLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeMonth} />
+                <MonthLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeMonth} handleTodayClick={ changeToCurrentMonth } />
             :
-                <WeekLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeMonth} />
+                <WeekLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeMonth} handleTodayClick={ changeToCurrentMonth } />
             }
         </motion.div>
     )

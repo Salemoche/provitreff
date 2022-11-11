@@ -22,7 +22,7 @@ import { SectionStyles } from '../../styles/global.styles.components';
 import { CalendarContainerStyles, DownloadsStyles, CalendarTitlesStyles } from '../../styles/modules/mieten/index.styles';
 import { CalendarTitleStyles } from '../../styles/modules/mieten/index.styles';
 
-
+// SM TODO
 const CalendarComponent = dynamic( () => import('../../components/rent/calendar/calendar.component'),{
     ssr: false
 
@@ -55,6 +55,7 @@ const Mieten = ({ locale, content, global, calendars }) => {
     const occupiedTitle = content?.rentEntries[0]?.occupiedTitle || '';
 
     const [currentCalendar, setCurrentCalendar] = useState('culture')
+
     
 	return (
         <motion.div
@@ -112,41 +113,6 @@ const Mieten = ({ locale, content, global, calendars }) => {
 }
 
 export default Mieten;
-
-
-// export const getStaticProps = async(locale) => {
-
-//     let language = 'default'
-
-//     switch (locale.locale) {
-//         case 'en':
-//             language = 'english'
-//             break;
-//     }
-
-//     const contentData = await apolloClient.query({
-//         query: MIETEN_QUERY(),
-//         variables: {
-//             language: language
-//         }
-//     });
-
-//     const globalData = await apolloClient.query({
-//         query: GLOBAL_QUERY()
-//     });
-
-    
-//     const content = contentData.data;
-//     const global = globalData.data;
-    
-//     return {
-//         props: {
-//             locale,
-//             content,
-//             global
-//         }
-//     }
-// } 
 
 const fetchCalendar = async ( id, apiKey ) => {
 

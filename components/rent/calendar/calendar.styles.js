@@ -1,34 +1,72 @@
 import styled, { css } from "styled-components";
+import { arrowRight } from '/public/assets/img/arrow-right.svg';
+import { arrowLeft } from '/public/assets/img/arrow-left.svg';
+import { getFontSize } from '../../../lib/helpers';
 
 const CalendarLayoutStyles = styled('div')`
+    .fixed {
+        background: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+    }
 
-`
+    .reserved {
+        background: rgba(0, 0, 0, 0.25);
+        pointer-events: none;
+    }
 
-export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
+    .bs-calendar-day {
+        border: 2px solid black;
+        transition: .3s;
 
-    .bs-calendar-header {
-        display: flex;
-        justify-content: space-between;
-
-        .bs-calendar-header-button {
-            width: 40px;
-            aspect-ratio: 1/1;
-            background: green;
-
-            &-prev {
-                background: yellow;
-                margin-left: auto;
-            }
-
-            &-next {
-                background: blue;
-            }
+        &:hover {
+            background: rgba(0, 0, 0, 0.25);
         }
     }
 
-    .bs-calendar-days {
+    .bs-calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: ${({ theme }) => theme.sizes.S }px;
 
+        h4 {
+            ${ props => getFontSize( 'M', props )};
+        }
+
+        .bs-calendar-header-today-button {
+            margin-right: ${({ theme }) => theme.sizes.XS }px;
+        }
+
+        .bs-calendar-header-button {
+            display: inline-block;
+            height: 51.5px;
+            aspect-ratio: 1/1;
+            color: transparent;
+
+            button {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+            }
+
+            &-prev {
+                button {
+                    background-image: url(${arrowLeft});
+                }
+            }
+            
+            &-next {
+                margin-left: ${({ theme }) => theme.sizes.XS }px;
+                margin-right: ${({ theme }) => theme.sizes.XS }px;
+                button {
+                    background-image: url(${arrowRight});
+                }
+            }
+        }
     }
+`
+
+export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
 
     .bs-calendar-days-heading,
     .bs-calendar-days-dates {
@@ -37,21 +75,29 @@ export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
 
         .bs-calendar-day {
             width: calc(100%/7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            aspect-ratio: 4/3;
+            padding: ${({ theme }) => theme.sizes.XXS }px ${({ theme }) => theme.sizes.XS }px;
 
             span {
                 display: inline-block;
             }
 
-            &.inactive {
-                opacity: 0.5;
+            &.inactive span {
+                opacity: 0.2;
             }
         }
     }
 
+    .bs-calendar-days-heading {
+        .bs-calendar-day {
+            border: none;
+            aspect-ratio: unset;
+            padding: 0 ${({ theme }) => theme.sizes.XS }px;
+        }
+    }
+
     .bs-calendar-days {
+
         .bs-calendar-days-heading {
             .bs-calendar-days-heading-item {
         
@@ -59,6 +105,7 @@ export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
         }
 
         .bs-calendar-days-dates {
+            border: 2px solid black;
             .bs-calendar-days-dates-item {
         
             }
