@@ -11,6 +11,7 @@ export const CalendarTitlesStyles = styled('div')`
     display: flex;
     justify-content: center;
     ${ props => getFontSize( 'L', props )};
+    flex-wrap: wrap;
 `
 
 export const CalendarTitleStyles = styled('h3')`
@@ -119,6 +120,8 @@ export const CalendarContainerStyles = styled('div')`
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
+            opacity: 1;
+            margin-top: ${ props => props.theme.sizes.M }px;
 
             .provi-calendar-tooltips__title {
                 width: 100%;
