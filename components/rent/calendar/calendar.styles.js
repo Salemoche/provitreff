@@ -17,7 +17,9 @@ const CalendarLayoutStyles = styled('div')`
     .bs-calendar-day {
         border: 2px solid black;
         transition: .3s;
+    }
 
+    .bs-calendar-days-dates-item {
         &:hover {
             background: rgba(0, 0, 0, 0.25);
         }
@@ -106,8 +108,18 @@ export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
 
         .bs-calendar-days-dates {
             border: 2px solid black;
-            .bs-calendar-days-dates-item {
-        
+            .bs-calendar-day {
+
+                &:nth-child(7n + 1),
+                &:nth-child(7n + 2),
+                &:nth-child(7n + 3),
+                &:nth-child(7n + 4) {
+                    background: none;
+                    pointer-events: none;
+                    span {
+                        opacity: 0.2;
+                    }
+                }
             }
         }
     }

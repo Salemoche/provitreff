@@ -56,7 +56,7 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
                 return (
                     <a 
                         key={`bs-calendar-day-current-${i}`} 
-                        className={`bs-calendar-day bs-calendar-days-dates-item-0${day} ${ isFixed && 'fixed' } ${ isReserved && 'reserved' }`}
+                        className={`bs-calendar-day bs-calendar-days-dates-item bs-calendar-days-dates-item-0${day} ${ isFixed && 'fixed' } ${ isReserved && 'reserved' }`}
                         day={ day }
                         month={ month }
                         year={ year }
