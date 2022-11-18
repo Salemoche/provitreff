@@ -8,6 +8,7 @@ export const ContentStyles = styled('div')`
     align-items: center;
     padding-top: ${ props => props.theme.sizes.navPadding }px;
     padding-bottom: ${ props => props.theme.sizes.L }px;
+    hyphens: auto;
     
 
     > * {
@@ -57,12 +58,22 @@ export const TableStyles = styled('div')`
 
     }
 
-    table {
+    .provi-table-table {
         margin-bottom: ${ props => props.theme.sizes.M }px;
         width: 100%;
 
-        td {
-            border: none;
+        .provi-table-row {
+            display: flex;
+
+            .provi-table-element {
+                border: none;
+                vertical-align: baseline;
+                width: 50%;
+
+                &:first-of-type {
+                    padding-right: ${ props => props.theme.sizes.S }px;
+                }
+            }
         }
     }
 `

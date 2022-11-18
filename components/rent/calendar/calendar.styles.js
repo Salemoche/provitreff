@@ -66,6 +66,16 @@ const CalendarLayoutStyles = styled('div')`
             }
         }
     }
+
+
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+
+        .bs-calendar-header {
+            flex-wrap: wrap;
+        }
+    }
+}
 `
 
 export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
@@ -110,7 +120,7 @@ export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
             border: 2px solid black;
             .bs-calendar-day {
 
-                &:nth-child(7n + 1),
+                /* &:nth-child(7n + 1),
                 &:nth-child(7n + 2),
                 &:nth-child(7n + 3),
                 &:nth-child(7n + 4) {
@@ -119,7 +129,7 @@ export const MonthLayoutStyles = styled(CalendarLayoutStyles)`
                     span {
                         opacity: 0.2;
                     }
-                }
+                } */
             }
         }
     }

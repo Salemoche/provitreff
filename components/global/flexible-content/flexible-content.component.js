@@ -4,7 +4,7 @@ import TitleComponent from '../title/title.component';
 import { TableStyles } from '../../../styles/global.styles.components';
 
 const FlexibleContentComponent = ({ content }) => { 
-
+// console.log(content[4]?.table[0])
     return (
         <>   
             { content.map( ( section, i ) => {
@@ -26,16 +26,14 @@ const FlexibleContentComponent = ({ content }) => {
                         <React.Fragment key={`table-${i}`}>
                             <TableStyles className="provi-table">
                                 { section.tableHeader && <h3>{ section.tableHeader }</h3> }
-                                <table>
-                                    <tbody>
-                                        { section.table.map( ( row, j ) => (
-                                            <tr key={`row-${j}`}>
-                                                <td>{row.col1}</td>
-                                                <td>{row.col2}</td>
-                                            </tr>
-                                        )) }
-                                    </tbody>
-                                </table>
+                                <div className="provi-table-table">
+                                    { section.table.map( ( row, j ) => (
+                                        <div className="provi-table-row" key={`row-${j}`}>
+                                            <div className="provi-table-element" dangerouslySetInnerHTML={{ __html: row.col1}}></div>
+                                            <div className="provi-table-element" dangerouslySetInnerHTML={{ __html: row.col2}}></div>
+                                        </div>
+                                    )) }
+                                </div>
                             </TableStyles>
                         </React.Fragment>
                     )

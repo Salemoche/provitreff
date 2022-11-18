@@ -169,4 +169,17 @@ export default createGlobalStyle`
             width: calc( 100vw - (2 * ${ props => props.theme.sizes.S }px));
         }
     }
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            ${ props => getFontSize( 'M', props )}
+            line-height: 1;
+        }
+    }
 `

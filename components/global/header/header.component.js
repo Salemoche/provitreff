@@ -15,6 +15,8 @@ function HeaderComponent() {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
+    console.log(snap.pages.aktuell)
+
     return (
         <HeaderStyles backgroundColor={snap?.global?.colors?.current} active={menuOpen}>
             <TitleComponent url={snap?.global?.proviLogo} hoverUrl={snap?.global?.proviLogoHover} link={`/${locale}`} isMain={true} />
@@ -23,13 +25,13 @@ function HeaderComponent() {
                 
                     <ul>
                         <li>
-                            <MenuItemStyles href="/en" currentMenuItem={router.pathname == "/"}>Current</MenuItemStyles>
+                            <MenuItemStyles href="/en" currentMenuItem={router.pathname == "/"}>{snap.pages.aktuell.titel[locale]}</MenuItemStyles>
                         </li>
                         <li>
-                            <MenuItemStyles href="/en/mieten" currentMenuItem={router.pathname == "/mieten"}>Rent</MenuItemStyles>
+                            <MenuItemStyles href="/en/mieten" currentMenuItem={router.pathname == "/mieten"}>{snap.pages.mieten.titel[locale]}</MenuItemStyles>
                         </li>
                         <li>
-                            <MenuItemStyles href="/en/provi" currentMenuItem={router.pathname == "/provi"}>Provi</MenuItemStyles>
+                            <MenuItemStyles href="/en/provi" currentMenuItem={router.pathname == "/provi"}>{snap.pages.provi.titel[locale]}</MenuItemStyles>
                         </li>
                         <li className="provi-navigation-language-switcher">
                             <Link className="provi-de" href="" locale="de">
@@ -41,13 +43,13 @@ function HeaderComponent() {
 
                 <ul>
                     <li>
-                        <MenuItemStyles href="/" currentMenuItem={router.pathname == "/"}>Aktuell</MenuItemStyles>
+                        <MenuItemStyles href="/" currentMenuItem={router.pathname == "/"}>{snap.pages.aktuell.titel[locale]}</MenuItemStyles>
                     </li>
                     <li>
-                        <MenuItemStyles href="/mieten" currentMenuItem={router.pathname == "/mieten"}>Mieten</MenuItemStyles>
+                        <MenuItemStyles href="/mieten" currentMenuItem={router.pathname == "/mieten"}>{snap.pages.mieten.titel[locale]}</MenuItemStyles>
                     </li>
                     <li>
-                        <MenuItemStyles href="/provi" currentMenuItem={router.pathname == "/provi"}>Provi</MenuItemStyles>
+                        <MenuItemStyles href="/provi" currentMenuItem={router.pathname == "/provi"}>{snap.pages.provi.titel[locale]}</MenuItemStyles>
                     </li>
                     <li className="provi-navigation-language-switcher">
                         <Link className="provi-en" href="" locale="en">

@@ -34,14 +34,15 @@ const Mieten = ({ locale, content, global, calendars }) => {
     const snap = useSnapshot(state);
     useSetGlobals( global );
     
-    const cultureCalendar = content?.rentEntries[0]?.cultureCalendar || '';
+    // const cultureCalendar = content?.rentEntries[0]?.cultureCalendar || '';
     const cultureTitle = content?.rentEntries[0]?.cultureTitle || '';
     const downloadTitleUrl = content?.rentEntries[0]?.downloadTitle[0]?.url || '';
     const downloadTitleUrlHover = content?.rentEntries[0]?.downloadTitleHover[0]?.url || '';
-    const downloads = content?.rentEntries[0]?.downloads
+    const downloadsCulture = content?.rentEntries[0]?.downloadsCulture;
+    const downloadsMovement = content?.rentEntries[0]?.downloadsMovement;
     const infoContent = content?.rentEntries[0]?.infoContent || '';
     const infoTitleUrl = content?.rentEntries[0]?.infoTitle[0]?.url || '';
-    const movementCalendar = content?.rentEntries[0]?.movementCalendar || '';
+    // const movementCalendar = content?.rentEntries[0]?.movementCalendar || '';
     const movementTitle = content?.rentEntries[0]?.movementTitle || '';
     const occupancyContent = content?.rentEntries[0]?.occupancyContent || '';
     const occupancyTitleUrl = content?.rentEntries[0]?.occupancyTitle[0]?.url || '';
@@ -49,13 +50,13 @@ const Mieten = ({ locale, content, global, calendars }) => {
     // const termsContent = content?.rentEntries[0]?.termsContent || '';
     // const termsTitleUrl = content?.rentEntries[0]?.termsTitle[0]?.url || '';
     const flexibleContentRent1 = content?.rentEntries[0]?.flexibleContentRent1 || [];
-    const flexibleContentRent2 = content?.rentEntries[0]?.flexibleContentRent2 || [];
+    const flexibleContentRentCulture = content?.rentEntries[0]?.flexibleContentRentCulture || [];
+    const flexibleContentRentMovement = content?.rentEntries[0]?.flexibleContentRentMovement || [];
     const reservedTitle = content?.rentEntries[0]?.reservedTitle || '';
     const freeTitle = content?.rentEntries[0]?.freeTitle || '';
     const occupiedTitle = content?.rentEntries[0]?.occupiedTitle || '';
 
     const [currentCalendar, setCurrentCalendar] = useState('culture')
-
     
 	return (
         <motion.div
@@ -90,8 +91,8 @@ const Mieten = ({ locale, content, global, calendars }) => {
                         </div>
                         <div className="provi-calendar-tooltips">
                             <div className="provi-calendar-tooltips__title"> Tooltips </div>
-                            <div className="provi-calendar-tooltip reserved"> { reservedTitle } </div>
                             <div className="provi-calendar-tooltip free"> { freeTitle } </div>
+                            <div className="provi-calendar-tooltip reserved"> { reservedTitle } </div>
                             <div className="provi-calendar-tooltip occupied"> { occupiedTitle } </div>
                         </div>
                     </CalendarContainerStyles>
@@ -99,14 +100,18 @@ const Mieten = ({ locale, content, global, calendars }) => {
                 <br/><br/>
                 {/* <TitleComponent url={termsTitleUrl} id="terms"/>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(termsContent) }}></SectionStyles> */}
-                <FlexibleContentComponent content={flexibleContentRent2} />
+                <FlexibleContentComponent content={ currentCalendar === 'culture' ? flexibleContentRentCulture : flexibleContentRentMovement } />
                 <TitleComponent url={downloadTitleUrl} hoverUrl={downloadTitleUrlHover} id="download"/>
                 <br />
                 <DownloadsStyles>
-                    { downloads.map( ( download, i ) => (
+                    { currentCalendar === 'culture' && downloadsCulture.map( ( download, i ) => (
+                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
+                    ))}
+                    { currentCalendar === 'movement' && downloadsMovement.map( ( download, i ) => (
                         <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
                     ))}
                 </DownloadsStyles>
+                <br/><br/>
             </LayoutComponent>
         </motion.div>
 	)

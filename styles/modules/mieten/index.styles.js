@@ -53,6 +53,7 @@ export const CalendarTitleStyles = styled('h3')`
 export const CalendarContainerStyles = styled('div')`
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
     /* gap: ${ props => props.theme.sizes.S }px; */
     position: relative;
     
@@ -80,16 +81,25 @@ export const CalendarContainerStyles = styled('div')`
         opacity: 0;
         transition: .3s;
         pointer-events: none;
-        /* padding-right: ${ props => props.theme.sizes.S }px; */
-        /* flex: 1; */
+        position: static;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        opacity: 1;
+        margin-top: ${ props => props.theme.sizes.M }px;
 
         .provi-calendar-tooltips__title {
+            width: 100%;
         }
 
         .provi-calendar-tooltip {
             border: 3px solid black;            
             margin-top: ${ props => props.theme.sizes.S }px;
             padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.XS }px;
+                margin-right: ${ props => props.theme.sizes.S }px;
+                margin-top: ${ props => props.theme.sizes.XS }px;
+                flex: 1;
 
             &.occupied {
                 background: rgba(0, 0, 0, 0.5)
@@ -98,12 +108,15 @@ export const CalendarContainerStyles = styled('div')`
             &.reserved {
                 background: rgba(0, 0, 0, 0.25)
             }
+
+            &:last-child {
+                margin-right: 0;
+            }
         }
     }
 
 
-    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
-        flex-wrap: wrap;
+    /* @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
 
         .provi-calendar-container,
         thead {
@@ -114,30 +127,5 @@ export const CalendarContainerStyles = styled('div')`
             }
         }
 
-        .provi-calendar-tooltips {
-            position: static;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            opacity: 1;
-            margin-top: ${ props => props.theme.sizes.M }px;
-
-            .provi-calendar-tooltips__title {
-                width: 100%;
-            }
-
-
-
-            .provi-calendar-tooltip {
-                margin-right: ${ props => props.theme.sizes.S }px;
-                margin-top: ${ props => props.theme.sizes.XS }px;
-                flex: 1;
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-        }
-    }
+    } */
 `

@@ -43,12 +43,11 @@ export const TitleStyles = styled('div')`
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
 
-        margin-top: 14vw;
+        margin-top: calc(8vw + 32px);
 
         .provi-title-image {
-            width: auto !important;
-            object-position: left;
-            opacity: 1 !important;
+
+            max-width: unset;
 
             &-hover {
                 display: none;
@@ -63,6 +62,9 @@ export const TitleStyles = styled('div')`
         .provi-title-image {
 
             max-width: calc( 100% - ${ props => props.theme.sizes.M }px - 8vw) !important;
+            width: auto !important;
+            object-position: left;
+            opacity: 1 !important;
 
             /* width: auto !important;
             object-position: left;
