@@ -122,6 +122,19 @@ export const HeaderStyles = styled('header')`
                 margin-top: auto;
                 display: flex;
                 align-items: center;
+                text-align: center;
+
+                .provi-email {
+                    order: 1;
+                }
+
+                .provi-address {
+                    order: 3;
+                }
+
+                .provi-number {
+                    order: 2;
+                }
             }
         }
     }

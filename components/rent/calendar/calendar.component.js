@@ -12,6 +12,9 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
 
     const parseCalendar = ( calendar ) => {
         // Transform Start and End Date and DateTime into Date
+
+        if (!calendar) return null
+
         const parseStartDate = ( start ) => {
             if ( start.date ) return new Date( start.date );
             if ( start.dateTime ) return new Date( start.dateTime );
@@ -29,6 +32,8 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
     const compareEventsToDates = ( calendar, day ) => {
 
         let isMatch
+
+        if ( !calendar ) return false 
 
         calendar.forEach( event => {
             if ( event.startDate.getDate() == day && event.startDate.getMonth() + 1 == month && event.startDate.getFullYear() == year) {
@@ -51,7 +56,8 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
             days.map( ( day, i ) => {
 
                 let isReserved = compareEventsToDates( parseCalendar(calendars.reserved), day)
-                let isFixed =compareEventsToDates( parseCalendar(calendars.fixed), day)
+                let isFixed = compareEventsToDates( parseCalendar(calendars.blocked), day) || compareEventsToDates( parseCalendar(calendars.fixed), day);
+                // let isFixed = compareEventsToDates( parseCalendar(calendars.fixed), day);
 
                 return (
                     <a 
@@ -60,7 +66,7 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
                         day={ day }
                         month={ month }
                         year={ year }
-                        href={ `mailto:${store.global.proviEmail}?subject=Reservation für den ${ day }. ${ calendar.names.de.months[month]} ${ year }&body=Hallo, ich würde gerne den Provitreff am ${ day }. ${ calendar.names.de.months[month]} ${ year } reservieren.` }
+                        href={ `mailto:${store.global.proviEmail}?subject=Reservation für den ${ day }. ${ calendar.names.de.months[month-1]} ${ year }&body=Hallo, ich würde gerne den Provitreff am ${ day }. ${ calendar.names.de.months[month-1]} ${ year } reservieren.` }
                     >
                         <span>{day < 10 && 0}{day}</span>
                     </a>
@@ -257,7 +263,7 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
     }, [])
         
     useEffect(() => {
-        console.log( calendars.reserved, calendars.fixed )
+        // console.log( calendars.fixed )
     }, [calendar])
 
     return (

@@ -15,8 +15,6 @@ function HeaderComponent() {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
-    console.log(snap.pages.aktuell)
-
     return (
         <HeaderStyles backgroundColor={snap?.global?.colors?.current} active={menuOpen}>
             <TitleComponent url={snap?.global?.proviLogo} hoverUrl={snap?.global?.proviLogoHover} link={`/${locale}`} isMain={true} />
@@ -59,9 +57,9 @@ function HeaderComponent() {
                 </ul>
                 } 
                 <div className="provi-navigation-info">
-                    <div dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
-                    {global?.proviNumber && <div>{ global?.proviNumber }</div>}
-                    <a href={ global?.proviEmail }>{global?.proviEmail}</a>
+                    <div className="provi-address" dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
+                    {global?.proviNumber && <div className="provi-number">{ global?.proviNumber }</div>}
+                    <a className="provi-email" href={ global?.proviEmail }>{global?.proviEmail}</a>
                 </div>
             </nav>
             <BurgerStyles onClick={() => { setMenuOpen(!menuOpen) }}>

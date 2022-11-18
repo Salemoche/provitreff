@@ -84,7 +84,7 @@ const Mieten = ({ locale, content, global, calendars }) => {
                     <CalendarContainerStyles>
                         <div className="provi-calendar-container">
                             { currentCalendar == 'culture' ?
-                                <CalendarComponent calendars={{ reserved: calendars.calendarCultureReserved, fixed: calendars.calendarCultureFixed }} locale={locale} mode="month"/>
+                                <CalendarComponent calendars={{ reserved: calendars.calendarCultureReserved, fixed: calendars.calendarCultureFixed, blocked: calendars.calendarCultureBlocked }} locale={locale} mode="month"/>
                             :
                                 <CalendarComponent calendars={{ reserved: calendars.calendarMovementReserved, fixed: calendars.calendarMovementFixed }} locale={locale} mode="week"/>
                             }
@@ -121,7 +121,12 @@ export default Mieten;
 
 const fetchCalendar = async ( id, apiKey ) => {
 
-    const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?key=${apiKey}`;
+    const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
+    const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
+    // const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString();
+    // const lastDayOfNextYear = new Date().toISOString();
+
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?maxResults=2500&timeMin=${lastDayOfLastYear}&timeMax=${lastDayOfNextYear}&key=${apiKey}`;
 
     const response = await fetch(
         url,
@@ -129,7 +134,8 @@ const fetchCalendar = async ( id, apiKey ) => {
             method: 'GET'
         }
     )
-
+    
+    
     const data = await response.json();
     return data
 }
@@ -141,6 +147,9 @@ export async function getServerSideProps(context) {
     const calendarCultureFixed = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_FIXED, process.env.NEXT_CAL_API );
     const calendarMovementReserved = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_RESERVED, process.env.NEXT_CAL_API );
     const calendarMovementFixed = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_FIXED, process.env.NEXT_CAL_API );
+    const calendarCultureBlocked = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_BLOCKED, process.env.NEXT_CAL_API );
+
+    console.log(calendarCultureBlocked)
 
     let language = 'default'
 
@@ -175,6 +184,7 @@ export async function getServerSideProps(context) {
                 calendarCultureFixed,
                 calendarMovementReserved,
                 calendarMovementFixed,
+                calendarCultureBlocked,
             }
         }
     }
