@@ -144,7 +144,7 @@ export async function getServerSideProps(context) {
 
     const calendarCultureReserved = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_RESERVED, process.env.NEXT_CAL_API );
     const calendarCultureFixed = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_FIXED, process.env.NEXT_CAL_API );
-    const calendarMovementReserved = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_RESERVED, process.env.NEXT_CAL_API );
+    const calendarMovementReserved = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_ESERVED, process.env.NEXT_CAL_API );
     const calendarMovementFixed = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_FIXED, process.env.NEXT_CAL_API );
     const calendarCultureBlocked = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_BLOCKED, process.env.NEXT_CAL_API );
 
