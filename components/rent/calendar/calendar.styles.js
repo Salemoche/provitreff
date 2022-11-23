@@ -198,10 +198,14 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
                     grid-column-start: 0;
                     grid-column-end: 1;
                     padding: 0 ${({ theme }) => theme.sizes.XS }px;
+                    transition: background .3s;
+
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.3);
+                    }
                 }
 
                 .bs-calendar-day-event {
-                    border: 1px solid black;
                     background: rgba(0, 0, 0, 0.3);
                     grid-column-start: 0;
                     grid-column-end: 1;

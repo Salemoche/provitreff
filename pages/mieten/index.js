@@ -120,10 +120,10 @@ export default Mieten;
 
 const fetchCalendar = async ( id, apiKey ) => {
 
-    // const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
-    // const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
-    const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString(); // A week ago
-    const lastDayOfNextYear = new Date().toISOString(); // Today
+    const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
+    const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
+    // const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString(); // A week ago
+    // const lastDayOfNextYear = new Date().toISOString(); // Today
 
     const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?maxResults=2500&timeMin=${lastDayOfLastYear}&timeMax=${lastDayOfNextYear}&key=${apiKey}`;
 

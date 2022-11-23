@@ -163,8 +163,8 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
 
     const monday = calendar.firstDayOfWeek;
     const sunday = calendar.lastDayOfWeek;
+    const store = useSnapshot(state);
 
-    console.log( calendars.fixed.items[0] )
 
     const scrollRef = useRef(null)
 
@@ -176,7 +176,7 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
     const getDays = () => {
         let days = [];
 
-        for ( let i = 0; i < 1; i++ ) {
+        for ( let i = 0; i < 7; i++ ) {
             const currentDate = addDays(monday, i)
             days.push(currentDate)
         }
@@ -199,7 +199,6 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
             const isRightDate = (start.getDate() == date.getDate()) && (start.getMonth() == date.getMonth()) && (start.getFullYear() == date.getFullYear()) ;
 
             if ( isRightDate ) {
-                console.log(start.getHours(), start.getMinutes(), '-', end.getHours(), end.getMinutes());
                 day.events.push({
                     startHour: start.getHours(),
                     startMinute: start.getMinutes(),
@@ -215,24 +214,27 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
 
         return (
             <div className="bs-calendar-day" key={`bs-calendar-${Math.random()}`}>
-                {/* { day.hours.map( (hour, i) => (
-                    <div className={`bs-calendar-day-hour bs-hour-${i}`} key={`bs-hour-${i}`} style={{ gridRow: `${1 + i*4} / span 4`}}>
+                { day.hours.map( (hour, i) => (
+                    <a 
+                        href={ `mailto:${store.global.proviEmail}?subject=Reservation Bewegungsraum für den ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() }&body=Hallo, ich würde gerne den Bewegungsraum am ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() } ab ca ${i} Uhr Reservieren reservieren.` }
+                        className={`bs-calendar-day-hour bs-hour-${i}`} key={`bs-hour-${i}`} style={{ gridRow: `${1 + i*4} / span 4`}}
+                    >
                         { isMonday && `${i}:00`}
-                    </div> 
-                ))} */}
+                    </a> 
+                ))}
                 { day.events.map( (event, i) => (
-                    <div className={`bs-calendar-day-event bs-event-${i}`} key={`bs-event-${i}`} style={{ gridRow: getRowSpan(event) }}>
-                        {event.startHour}
-                    </div> 
+                    <div className={`bs-calendar-day-event bs-event-${i}`} key={`bs-event-${i}`} style={{ gridRow: getRowSpan(event) }}></div> 
                 ))}
             </div>
         )
     }
 
     const getRowSpan = ( event ) => {
-        const start = 1;
-        const end = 10;
-        return `${start} ${end}`;
+        const startMinuteRows = event.startMinute != 0 ? 4 / (60 / event.startMinute) : 0;
+        const start = event.startHour * 4 + startMinuteRows;
+        const endMinuteRows = event.endMinute != 0 ? 4 / (60 / event.endMinute) : 0;
+        const end = event.endHour * 4 + endMinuteRows;
+        return `${start} / ${end}`;
     }
 
     return(
@@ -248,13 +250,10 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
                     { calendar.names[locale].days.map( ( day, i ) => <div key={`bs-calendar-day-${i}`} className="bs-calendar-day bs-calendar-days-heading-item"><span>{day}</span></div> ) }
                 </div>
                 <div className="bs-calendar-days-heading bs-calendar-days-heading-date">
-                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
-                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
-                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
-                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
-                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
-                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
-                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+
+                    { getDays().map(( day, i ) => (
+                        <div key={`bs-calendar-date-${i}`} className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date">{day.getDate()}</div>
+                    )) }
                 </div>
                 <div className="bs-calendar-days-dates">
                     <div className="bs-calendar-scroll-container" ref={ scrollRef }>
