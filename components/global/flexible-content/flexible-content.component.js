@@ -16,7 +16,7 @@ const FlexibleContentComponent = ({ content }) => {
                             { section.subtitle && <h2>{ section.subtitle }</h2> }
                             { section.subtitle && <br /> }
                             { section.text && <div dangerouslySetInnerHTML={{ __html: section.text}}></div> }
-                            { (section.subtitle || section.text) && <br /> }
+                            {/* { (section.subtitle || section.text) && <br /> } */}
                             { section.text && <br /> }
                             { (section.subtitle && section.text) && <br /> }
                         </ContentStyles>

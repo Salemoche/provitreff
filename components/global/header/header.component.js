@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { HeaderStyles, MenuItemStyles, BurgerStyles } from './header.styles'
 import TitleComponent from '../title/title.component';
 import Link from 'next/link';
@@ -14,10 +14,30 @@ function HeaderComponent() {
     const global = snap.global;
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState()
+
+    const handleResize = () => {
+        if ( window.innerWidth < 768 ) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
+
+    useEffect(() => {
+        
+        handleResize()
+        window.addEventListener( 'resize', handleResize )
+        
+        return () => {
+            window.removeEventListener( 'resize', handleResize )
+        }
+    }, [])
+    
 
     return (
         <HeaderStyles backgroundColor={snap?.global?.colors?.current} active={menuOpen}>
-            <TitleComponent url={snap?.global?.proviLogo} hoverUrl={snap?.global?.proviLogoHover} link={`/${locale}`} isMain={true} />
+            <TitleComponent url={ isMobile ? snap?.global?.proviLogoBurger : snap?.global?.proviLogo } hoverUrl={snap?.global?.proviLogoHover} link={`/${locale}`} isMain={true} />
             <nav>
                 { locale === 'en' ?
                 
@@ -63,7 +83,7 @@ function HeaderComponent() {
                 </div>
             </nav>
             <BurgerStyles onClick={() => { setMenuOpen(!menuOpen) }}>
-                <img src="/assets/img/burger.svg" alt="" />
+                {/* <img src="/assets/img/burger.svg" alt="" /> */}
             </BurgerStyles>
         </HeaderStyles>
     )

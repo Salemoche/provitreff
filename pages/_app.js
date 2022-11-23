@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 // Data
-import { state} from '../lib/state';
+import { state } from '../lib/state';
 import { proxy, useSnapshot } from 'valtio';
 
 
@@ -20,9 +20,10 @@ import { AnimatePresence } from 'framer-motion'
 
 // Helpers
 // import { alwaysScripts } from '../lib/helpers';
-import { useDeviceDetector } from '../lib/hooks';
+// import { useDeviceDetector } from '../lib/hooks';
 // import '../i18n';
 import { useCurrentColor } from '../lib/hooks';
+import DeviceDetector from 'device-detector-js';
 
 
 function MyApp({ Component, pageProps }) {
@@ -30,9 +31,10 @@ function MyApp({ Component, pageProps }) {
     const snap = useSnapshot( state );
 
     const alwaysScripts = () => {
+        
     }
 
-    useDeviceDetector();
+    // const deviceDetector = useDeviceDetector();
     useCurrentColor( route, snap );
 
     useEffect(() => {

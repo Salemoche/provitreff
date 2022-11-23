@@ -100,7 +100,7 @@ export default createGlobalStyle`
 
         font-family: 'Rodger';
         ${ props => getFontSize( 'M', props )}
-        border: 3px solid black;            
+        border: 4px solid black;            
         padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.XS }px;
         background: none;
         color: black;

@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { getFontSize } from "../../../lib/helpers";
+import { TitleStyles } from "../title/title.styles";
 
 export const HeaderStyles = styled('header')`
     width: 100%;
@@ -15,6 +16,7 @@ export const HeaderStyles = styled('header')`
     padding:  ${ props => props.theme.sizes.S }px;
     z-index: 10;
 
+
         .provi-title {
             margin-top: 0;
             margin-bottom:  ${ props => props.theme.sizes.M }px;
@@ -28,6 +30,7 @@ export const HeaderStyles = styled('header')`
         overflow: hidden;
         padding-top: 2px;
         padding-bottom: 2px;
+        transition: all .3s;
         
         ul {
             display: flex;
@@ -57,9 +60,9 @@ export const HeaderStyles = styled('header')`
                 max-width: 100%;
             }
 
-            /* img.provi-title-image-hover {
+            img.provi-title-image-hover {
                 max-width: calc( 100% - 2* ${ props => props.theme.sizes.L }px)
-            } */
+            }
         }
 
         nav {
@@ -71,13 +74,21 @@ export const HeaderStyles = styled('header')`
 
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
 
+        max-height: 100vh;
         padding-left: ${ props => props.theme.sizes.S }px;
         padding-right: ${ props => props.theme.sizes.S }px;
 
         .provi-title {
             padding: 0;
             margin-bottom: 0;
+
+            img.provi-title-image-hover {
+                display: none;
+            }
         }
+
+
+
 
         nav {
             ${ props => getFontSize( 'M', props )};
@@ -95,7 +106,7 @@ export const HeaderStyles = styled('header')`
                     return css`
                         opacity: 1;
                         max-height: 100%;
-                        padding-bottom:  ${ props => props.theme.sizes.S }px;
+                        padding-bottom:  ${ props => props.theme.sizes.L }px;
                     `
                 }
             }}
@@ -143,10 +154,12 @@ export const HeaderStyles = styled('header')`
 
         nav {
             height: calc( 100vh - 18vw );
-            .provi-navigation-info {
-                align-items: flex-start;
-            }
+            /* .provi-navigation-info {
+                align-items: center;
+            } */
         }
+
+
     }
 
 `
@@ -173,17 +186,17 @@ export const MenuItemStyles = styled('a')`
     } };
 `
 
-export const BurgerStyles = styled('div')`
 
-    width: 10vw;
-    height: 10vw;
+export const BurgerStyles = styled('div')`
+    width: 18vw;
+    height: 18vw;
     position: absolute;
     right: ${ props => props.theme.sizes.S }px;
-    top: calc(24px + 1vw);
+    top: calc(24px);
     cursor pointer;
     display: none;
+    z-index: 1;
     
-
     ${ props => {
         if (props.currentMenuItem) {
             return css`
@@ -194,13 +207,30 @@ export const BurgerStyles = styled('div')`
         }
     } };
 
-@media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
-    display: inherit;
-}
-
-@media screen and ( max-width: ${ props => props.theme.breakpoints.S }px) {
-    width: 9vw;
-    height: 9vw;
-    top: calc(20px + 1vw);
-}
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+        display: inherit;
+    }
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.S }px) {
+        
+        width: 15vw;
+        height: 15vw;
+        top: 20px;
+    }
 `
+
+// export const SiteTitleStyles = styled(TitleStyles)`
+    
+//     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+//         justify-content: flex-start;
+//         width: 100vw;
+// s
+//         .provi-title-image {
+
+//             /* max-width: calc( 100% - ${ props => props.theme.sizes.M }px - 11vw) !important; */
+//             max-width: calc( 100% - ${ props => props.theme.sizes.M }px - 11vw) !important;
+//             width: unset !important;
+
+//         }
+
+//     }
+// `

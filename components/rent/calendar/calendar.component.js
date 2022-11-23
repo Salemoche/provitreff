@@ -4,6 +4,24 @@ import { useSnapshot } from 'valtio';
 import { state } from '../../../lib/state';
 import { CalendarEventStyles, MonthLayoutStyles, WeekLayoutStyles } from './calendar.styles';
 
+// BS TODO
+const weekStartHour = 3;
+
+const getWeekDay = ( date, day ) => {
+    // console.log(date)
+    var targetDay = date.getDay() || 7;  
+    if( targetDay !== day ) date.setHours(-24 * (targetDay - day)); 
+
+    // console.log(date)
+    return date;
+}
+
+const addDays = (date, days) => {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
 const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, handleTodayClick }) => {
 
     const month = calendar.currentMonth + 1;
@@ -141,10 +159,112 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
 }
 
 
-const WeekLayoutComponent = ({ calendars, calendar }) => {
+const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, handleTodayClick }) => {
+
+    const monday = calendar.firstDayOfWeek;
+    const sunday = calendar.lastDayOfWeek;
+
+    console.log( calendars.fixed.items[0] )
+
+    const scrollRef = useRef(null)
+
+    useEffect(() => {
+        const weekStartHourElement = document.querySelector(`.bs-hour-${weekStartHour}`);
+        scrollRef.current.scroll({top: weekStartHourElement?.offsetTop})
+    }, [scrollRef.current])
+    
+    const getDays = () => {
+        let days = [];
+
+        for ( let i = 0; i < 1; i++ ) {
+            const currentDate = addDays(monday, i)
+            days.push(currentDate)
+        }
+
+        return days;
+    }
+
+    const getDay = ( date, isMonday = false ) => {
+        // console.log(events)
+
+        let day = {
+            hours: [],
+            events: []  
+        };
+        
+        calendars.fixed.items.forEach( event => {
+            const start = new Date( event.start.dateTime );
+            const end = new Date( event.end.dateTime );
+            
+            const isRightDate = (start.getDate() == date.getDate()) && (start.getMonth() == date.getMonth()) && (start.getFullYear() == date.getFullYear()) ;
+
+            if ( isRightDate ) {
+                console.log(start.getHours(), start.getMinutes(), '-', end.getHours(), end.getMinutes());
+                day.events.push({
+                    startHour: start.getHours(),
+                    startMinute: start.getMinutes(),
+                    endHour: end.getHours(),
+                    endMinute: end.getMinutes(),
+                })
+            }
+        });
+
+        for ( let j = 0; j < 24; j++ ) {
+            day.hours.push(j)
+        }
+
+        return (
+            <div className="bs-calendar-day" key={`bs-calendar-${Math.random()}`}>
+                {/* { day.hours.map( (hour, i) => (
+                    <div className={`bs-calendar-day-hour bs-hour-${i}`} key={`bs-hour-${i}`} style={{ gridRow: `${1 + i*4} / span 4`}}>
+                        { isMonday && `${i}:00`}
+                    </div> 
+                ))} */}
+                { day.events.map( (event, i) => (
+                    <div className={`bs-calendar-day-event bs-event-${i}`} key={`bs-event-${i}`} style={{ gridRow: getRowSpan(event) }}>
+                        {event.startHour}
+                    </div> 
+                ))}
+            </div>
+        )
+    }
+
+    const getRowSpan = ( event ) => {
+        const start = 1;
+        const end = 10;
+        return `${start} ${end}`;
+    }
 
     return(
-        <WeekLayoutStyles>Week Layout</WeekLayoutStyles>
+        <WeekLayoutStyles>
+            <div className="bs-calendar-header">
+                <button className="bs-calendar-header-today-button" onClick={handleTodayClick}>{ locale == 'en' ? 'today' : 'heute'}</button>
+                <div className="bs-calendar-header-button bs-calendar-header-button-prev"><button onClick={() => handleChangeMonth('prev')}>&lt;</button></div>
+                <div className="bs-calendar-header-button bs-calendar-header-button-next"><button onClick={() => handleChangeMonth('next')}>&gt;</button></div>
+                <h4>{ monday.getDate() }.{ monday.getMonth() + 1 }.{ monday.getFullYear() } – { sunday.getDate() }.{ sunday.getMonth() + 1 }.{ sunday.getFullYear() }</h4>
+            </div>
+            <div className="bs-calendar-days">
+                <div className="bs-calendar-days-heading bs-calendar-days-heading-day">
+                    { calendar.names[locale].days.map( ( day, i ) => <div key={`bs-calendar-day-${i}`} className="bs-calendar-day bs-calendar-days-heading-item"><span>{day}</span></div> ) }
+                </div>
+                <div className="bs-calendar-days-heading bs-calendar-days-heading-date">
+                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+                    <div className="bs-calendar-day bs-calendar-days-heading-item bs-calendar-days-heading-item-date"> 00 </div>
+                </div>
+                <div className="bs-calendar-days-dates">
+                    <div className="bs-calendar-scroll-container" ref={ scrollRef }>
+                        { getDays().map(( day, i ) => (
+                            getDay( day, i == 0)
+                        )) }
+                    </div>
+                </div>
+            </div>
+        </WeekLayoutStyles>
     )
 }
 
@@ -210,21 +330,31 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
         firstDayOfMonth: new Date( date.getFullYear(), date.getMonth(), 1 ).getDay(),
         lastDateOfMonth: new Date( date.getFullYear(), date.getMonth() + 1, 0 ).getDate(),
         lastDateOfLastMonth: new Date( date.getFullYear(), date.getMonth(), 0 ).getDate(),
+        firstDayOfWeek: getWeekDay( new Date(), 1 ),
+        lastDayOfWeek: getWeekDay( new Date(), 7 ),
     })
 
-    const changeMonth = ( direction ) => {
+    const changeCalendarDate = ( direction ) => {
         
-        let newMonth
-        let newYear   
+        let monday = calendar.firstDayOfWeek;
+        let newMonday;
+        let newMonth;
+        let newYear;  
 
         if ( direction == 'next' ) {
             newMonth = calendar.currentMonth + 1 > 11 ? 0 : calendar.currentMonth + 1;
             newYear = calendar.currentMonth + 1 > 11 ? calendar.currentYear + 1 : calendar.currentYear;
+            newMonday = new Date( monday.getFullYear(), monday.getMonth(), monday.getDate() + 7 )
 
         } else {
             newMonth = calendar.currentMonth - 1 < 0 ? 11 : calendar.currentMonth - 1;
             newYear = calendar.currentMonth - 1 < 0 ? calendar.currentYear - 1 : calendar.currentYear;
+            newMonday = new Date( monday.getFullYear(), monday.getMonth(), monday.getDate() - 7 )
         }
+
+        // console.log( monday )
+        // console.log(getWeekDay( newMonday, 1 ))
+        // console.warn(newMonday)
             
         return setCalendar( prev => { return ({
             ...prev,
@@ -233,12 +363,9 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
             firstDayOfMonth: new Date( newYear, newMonth, 1 ).getDay(),
             lastDateOfMonth: new Date( newYear, newMonth + 1, 0 ).getDate(),
             lastDateOfLastMonth: new Date( newYear, newMonth, 0 ).getDate(),
+            firstDayOfWeek: getWeekDay( newMonday, 1 ),
+            lastDayOfWeek: getWeekDay( newMonday, 7 ),
         })} )
-
-        // return setCalendar( prev => {({
-        //     ...prev,
-        //     lastDateOfMonth: new Date( prev.currentYear, prev.currentMonth, 0 ).getDate()
-        // })} )
     }
 
     const changeToCurrentMonth = () => {
@@ -251,11 +378,15 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
             lastDateOfMonth: new Date( date.getFullYear(), date.getMonth() + 1, 0 ).getDate(),
             lastDateOfLastMonth: new Date( date.getFullYear(), date.getMonth(), 0 ).getDate(),
         })} )
+    }
 
-        // return setCalendar( prev => {({
-        //     ...prev,
-        //     lastDateOfMonth: new Date( prev.currentYear, prev.currentMonth, 0 ).getDate()
-        // })} )
+    const changeToCurrentWeek = () => {
+            
+        return setCalendar( prev => { return ({
+            ...prev,
+            currentYear: date.getFullYear(),
+            currentMonth: date.getMonth(),
+        })} )
     }
         
     useEffect(() => {
@@ -270,11 +401,8 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
         <motion.div
             className="provi-calendar provi-calendar-culture"    
         >
-            { mode == 'month' ? 
-                <MonthLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeMonth} handleTodayClick={ changeToCurrentMonth } />
-            :
-                <WeekLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeMonth} handleTodayClick={ changeToCurrentMonth } />
-            }
+            { mode == 'month' && <MonthLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeCalendarDate} handleTodayClick={ changeToCurrentMonth } /> }
+            { mode == 'week' && <WeekLayoutComponent calendars={ calendars } calendar={ calendar } locale={locale} handleChangeMonth={changeCalendarDate} handleTodayClick={ changeToCurrentWeek } /> }
         </motion.div>
     )
 }

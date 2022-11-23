@@ -3,17 +3,41 @@ import { TitleStyles } from './title.styles';
 import { motion } from 'framer-motion';
 import { loadSVGasXML } from '../../../lib/helpers';
 import { useRouter } from 'next/router';
+import DeviceDetector from 'device-detector-js';
 
 function TitleComponent({ url, hoverUrl, link = null, isMain = false }) {
 
     const imageRef = useRef(null);
     const router = useRouter();
+    const [isMobile, setIsMobile] = useState(false)
     // const [svg, setSvg] = useState(null)
 
     // useEffect(() => {
     //     setSvg(loadSVGasXML( imageRef, url ));
     //     // console.log(loadSVGasXML( imageRef, url ))
     // }, [])
+
+    const deviceScript = () => {
+        const deviceDetector = new DeviceDetector();
+        const userAgent = window.navigator.userAgent;
+        const device = deviceDetector.parse(userAgent);
+
+        if ( device.device.type === 'smartphone' || device.device.type === 'tablet' ) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
+
+    useEffect(() => {
+        deviceScript();
+        window.addEventListener( 'resize', deviceScript);
+    
+        return () => {
+            window.removeEventListener( 'resize', deviceScript);
+            
+        }
+    }, [])
     
     const scrollToTitle = () => {
 
@@ -25,7 +49,7 @@ function TitleComponent({ url, hoverUrl, link = null, isMain = false }) {
     }
 
     return ( 
-        <TitleStyles className="provi-title" isMain={isMain}>
+        <TitleStyles className="provi-title" isMain={isMain} isMobile={isMobile}>
             <motion.img
                 // initial={{ width: 'auto'}}
                 whileHover={{ opacity: 0 }}

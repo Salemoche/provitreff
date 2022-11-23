@@ -74,23 +74,22 @@ const Mieten = ({ locale, content, global, calendars }) => {
                 <TitleComponent url={occupancyTitleUrl} hoverUrl={occupancyTitleUrlHover} id="occupancy"/>
                 <br />
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(occupancyContent) }}></SectionStyles>
-                <br/><br/>
+                <br/>
                 <SectionStyles>
                     <CalendarTitlesStyles>
                         <CalendarTitleStyles className="provi-calendar-title-culture" active={ currentCalendar == 'culture' } onClick={ () => setCurrentCalendar('culture') }>{ cultureTitle }</CalendarTitleStyles> 
-                        / 
+                        <span>/</span>
                         <CalendarTitleStyles className="provi-calendar-title-movement" active={ currentCalendar == 'movement' } onClick={ () => setCurrentCalendar('movement') }>{ movementTitle }</CalendarTitleStyles>
                     </CalendarTitlesStyles>
                     <CalendarContainerStyles>
                         <div className="provi-calendar-container">
-                            { currentCalendar == 'culture' ?
+                            {/* { currentCalendar == 'culture' ?
                                 <CalendarComponent calendars={{ reserved: calendars.calendarCultureReserved, fixed: calendars.calendarCultureFixed, blocked: calendars.calendarCultureBlocked }} locale={locale} mode="month"/>
-                            :
+                            : */}
                                 <CalendarComponent calendars={{ reserved: calendars.calendarMovementReserved, fixed: calendars.calendarMovementFixed }} locale={locale} mode="week"/>
-                            }
+                            {/* } */}
                         </div>
                         <div className="provi-calendar-tooltips">
-                            <div className="provi-calendar-tooltips__title"> Tooltips </div>
                             <div className="provi-calendar-tooltip free"> { freeTitle } </div>
                             <div className="provi-calendar-tooltip reserved"> { reservedTitle } </div>
                             <div className="provi-calendar-tooltip occupied"> { occupiedTitle } </div>
@@ -121,10 +120,10 @@ export default Mieten;
 
 const fetchCalendar = async ( id, apiKey ) => {
 
-    const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
-    const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
-    // const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString();
-    // const lastDayOfNextYear = new Date().toISOString();
+    // const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
+    // const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
+    const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString(); // A week ago
+    const lastDayOfNextYear = new Date().toISOString(); // Today
 
     const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?maxResults=2500&timeMin=${lastDayOfLastYear}&timeMax=${lastDayOfNextYear}&key=${apiKey}`;
 

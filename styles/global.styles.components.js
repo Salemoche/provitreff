@@ -76,4 +76,12 @@ export const TableStyles = styled('div')`
             }
         }
     }
+
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.L }px) {
+        h3 {
+
+            ${ props => getFontSize( 'XS', props )};
+        }
+    }
+
 `

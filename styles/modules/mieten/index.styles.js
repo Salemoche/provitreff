@@ -12,6 +12,15 @@ export const CalendarTitlesStyles = styled('div')`
     justify-content: center;
     ${ props => getFontSize( 'L', props )};
     flex-wrap: wrap;
+    
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+        ${ props => getFontSize( 'M', props )};
+
+        span {
+            display: inline-block;
+            margin-top: -3px;
+        }
+    }
 `
 
 export const CalendarTitleStyles = styled('h3')`
@@ -80,7 +89,6 @@ export const CalendarContainerStyles = styled('div')`
         left: calc( 100% + ${ props => props.theme.sizes.S }px);
         opacity: 0;
         transition: .3s;
-        pointer-events: none;
         position: static;
         width: 100%;
         display: flex;
@@ -94,7 +102,7 @@ export const CalendarContainerStyles = styled('div')`
         }
 
         .provi-calendar-tooltip {
-            border: 3px solid black;            
+            border: 4px solid black;            
             margin-top: ${ props => props.theme.sizes.S }px;
             padding: ${ props => props.theme.sizes.XXS }px  ${ props => props.theme.sizes.XS }px;
                 margin-right: ${ props => props.theme.sizes.S }px;
@@ -102,11 +110,11 @@ export const CalendarContainerStyles = styled('div')`
                 flex: 1;
 
             &.occupied {
-                background: rgba(0, 0, 0, 0.5)
+                background: rgba(0, 0, 0, 0.3)
             }
 
             &.reserved {
-                background: rgba(0, 0, 0, 0.25)
+                background: rgba(0, 0, 0, 0.15)
             }
 
             &:last-child {
