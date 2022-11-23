@@ -19,6 +19,12 @@ const theme = {
         XXL: 256,
     },
     fontSizes: {
+        XXS: {
+            unit: 'px',
+            fontSize: 12,
+            lineHeight: 1.2, 
+            letterSpacing: 0.4,
+        },
         XS: {
             unit: 'px',
             fontSize: 20,

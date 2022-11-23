@@ -164,6 +164,23 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
     .bs-calendar-days {
 
         .bs-calendar-days-heading {
+
+            &.bs-calendar-days-heading-day {
+                border: none;
+
+                .bs-calendar-day {
+                    border: none;
+                }
+            }
+
+            &.bs-calendar-days-heading-date {
+                border: 2px solid black;
+                border-bottom-width: 4px;
+
+                .bs-calendar-day {
+                    border-bottom: none;
+                }
+            }
             .bs-calendar-days-heading-item {
 
             }
@@ -171,6 +188,7 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
 
         .bs-calendar-days-dates {
             border: 2px solid black;
+            border-top: none;
 
             .bs-calendar-scroll-container {
 
@@ -192,13 +210,32 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
                 display: grid;
                 grid-gap: 0;
                 grid-template-rows: repeat(96, 1fr);
+                border-top: none;
+                overflow: hidden;
 
                 .bs-calendar-day-hour {
-                    border: 1px solid black;
-                    grid-column-start: 0;
-                    grid-column-end: 1;
+                    display: inline-block;
+                    /* aspect-ratio: 1/2; */
+                    border-top: 4px solid black;
+                    grid-column-start: 1;
+                    grid-column-end: 2;
                     padding: 0 ${({ theme }) => theme.sizes.XS }px;
                     transition: background .3s;
+                    ${ props => getFontSize( 'XS', props )};
+
+                        
+                    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+                        padding: 0 ${({ theme }) => theme.sizes.XXS }px;
+                    }
+
+                    @media screen and ( max-width: ${ props => props.theme.breakpoints.S }px) {
+                        ${ props => getFontSize( 'XXS', props )};
+                    }
+
+
+                    &:first-of-type {
+                        border-top: none;
+                    }
 
                     &:hover {
                         background: rgba(0, 0, 0, 0.3);
@@ -207,8 +244,8 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
 
                 .bs-calendar-day-event {
                     background: rgba(0, 0, 0, 0.3);
-                    grid-column-start: 0;
-                    grid-column-end: 1;
+                    grid-column-start: 1;
+                    grid-column-end: 2;
                 }
             }
         }

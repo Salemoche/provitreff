@@ -53,7 +53,7 @@ function HeaderComponent() {
                         </li>
                         <li className="provi-navigation-language-switcher">
                             <Link className="provi-de" href="" locale="de">
-                                <LanguageSwitcherStyles className="provi-hover-text" currentLanguage={locale == "de"}>DE</LanguageSwitcherStyles>
+                                <LanguageSwitcherStyles className="provi-hover-text" onClick={() => setMenuOpen(false)} currentLanguage={locale == "de"}>DE</LanguageSwitcherStyles>
                             </Link>
                         </li>
                     </ul>
@@ -71,7 +71,7 @@ function HeaderComponent() {
                     </li>
                     <li className="provi-navigation-language-switcher">
                         <Link className="provi-en" href="" locale="en">
-                            <LanguageSwitcherStyles className="provi-hover-text" currentLanguage={locale == "en"}>EN</LanguageSwitcherStyles>
+                            <LanguageSwitcherStyles className="provi-hover-text" onClick={() => setMenuOpen(false)} currentLanguage={locale == "en"}>EN</LanguageSwitcherStyles>
                         </Link>
                     </li>
                 </ul>

@@ -330,7 +330,7 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
         lastDateOfMonth: new Date( date.getFullYear(), date.getMonth() + 1, 0 ).getDate(),
         lastDateOfLastMonth: new Date( date.getFullYear(), date.getMonth(), 0 ).getDate(),
         firstDayOfWeek: getWeekDay( new Date(), 1 ),
-        lastDayOfWeek: getWeekDay( new Date(), 7 ),
+        lastDayOfWeek: addDays( getWeekDay( new Date(), 1 ), 6 ),
     })
 
     const changeCalendarDate = ( direction ) => {
@@ -343,12 +343,12 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
         if ( direction == 'next' ) {
             newMonth = calendar.currentMonth + 1 > 11 ? 0 : calendar.currentMonth + 1;
             newYear = calendar.currentMonth + 1 > 11 ? calendar.currentYear + 1 : calendar.currentYear;
-            newMonday = new Date( monday.getFullYear(), monday.getMonth(), monday.getDate() + 7 )
+            newMonday = addDays( monday, 7 )
 
         } else {
             newMonth = calendar.currentMonth - 1 < 0 ? 11 : calendar.currentMonth - 1;
             newYear = calendar.currentMonth - 1 < 0 ? calendar.currentYear - 1 : calendar.currentYear;
-            newMonday = new Date( monday.getFullYear(), monday.getMonth(), monday.getDate() - 7 )
+            newMonday = addDays( monday, -7 )
         }
 
         // console.log( monday )
@@ -363,7 +363,7 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
             lastDateOfMonth: new Date( newYear, newMonth + 1, 0 ).getDate(),
             lastDateOfLastMonth: new Date( newYear, newMonth, 0 ).getDate(),
             firstDayOfWeek: getWeekDay( newMonday, 1 ),
-            lastDayOfWeek: getWeekDay( newMonday, 7 ),
+            lastDayOfWeek: addDays( newMonday, 6 ),
         })} )
     }
 
@@ -385,6 +385,8 @@ const CalendarComponent = ({ calendars, mode, locale }) => {
             ...prev,
             currentYear: date.getFullYear(),
             currentMonth: date.getMonth(),
+            firstDayOfWeek: getWeekDay( new Date(), 1 ),
+            lastDayOfWeek: addDays( getWeekDay( new Date(), 1 ), 6 ),
         })} )
     }
         
