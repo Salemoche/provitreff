@@ -231,9 +231,9 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
 
     const getRowSpan = ( event ) => {
         const startMinuteRows = event.startMinute != 0 ? 4 / (60 / event.startMinute) : 0;
-        const start = event.startHour * 4 + startMinuteRows;
+        const start = event.startHour * 4 + startMinuteRows + 1;
         const endMinuteRows = event.endMinute != 0 ? 4 / (60 / event.endMinute) : 0;
-        const end = event.endHour * 4 + endMinuteRows;
+        const end = event.endHour * 4 + endMinuteRows + 1;
         return `${start} / ${end}`;
     }
 
