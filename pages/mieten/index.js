@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic'
 
 // Components
@@ -29,7 +29,7 @@ const CalendarComponent = dynamic( () => import('../../components/rent/calendar/
 });
 
 
-const Mieten = ({ locale, content, global, calendars }) => {
+const Mieten = ({ locale, content, global }) => {
 
     const snap = useSnapshot(state);
     useSetGlobals( global );
@@ -50,7 +50,41 @@ const Mieten = ({ locale, content, global, calendars }) => {
     const freeTitle = content?.rentEntries[0]?.freeTitle || '';
     const occupiedTitle = content?.rentEntries[0]?.occupiedTitle || '';
 
-    const [currentCalendar, setCurrentCalendar] = useState('culture')
+    const [calendars, setCalendars] = useState({})
+    const [currentCalendar, setCurrentCalendar] = useState('culture');
+    const [calendarsLoaded, setCalendarsLoaded] = useState({ movement: false, culture: false})
+
+    useEffect(() => {
+
+        const fetchCalendar = ( name, id, apiKey ) => {
+
+            const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
+            const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
+            // const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString();
+            // const lastDayOfNextYear = new Date().toISOString();
+
+            const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?maxResults=2500&timeMin=${lastDayOfLastYear}&timeMax=${lastDayOfNextYear}&key=${apiKey}`;
+
+            fetch(
+                url,
+                {
+                    method: 'GET'
+                }
+            ).then(res => {
+                return res.json()
+            }).then(data => {
+                setCalendars( prev => {return {...prev, [`${name}`]: data}});
+            })
+        }
+
+        fetchCalendar( 'calendarCultureReserved', 'tkjbc93c86eq34iv59b5khnp9k@group.calendar.google.com', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+        fetchCalendar( 'calendarCultureFixed', 'ghac0j8lsmqt192fqle27oqhrc@group.calendar.google.com', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+        fetchCalendar( 'calendarMovementReserved', 'bewegung@provitreff.ch', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+        fetchCalendar( 'calendarMovementFixed', 'bewegung@provitreff.ch', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+        fetchCalendar( 'calendarCultureBlocked', 'dau8peu8ub4aopu69hu4jsl73s@group.calendar.google.com', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+
+    }, [])
+    
     
 	return (
         <motion.div
@@ -68,11 +102,11 @@ const Mieten = ({ locale, content, global, calendars }) => {
                 <TitleComponent url={occupancyTitleUrl} hoverUrl={occupancyTitleUrlHover} id="occupancy"/>
                 <br />
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(occupancyContent) }}></SectionStyles>
-                <br/>
+                <br/><br/>
                 <SectionStyles>
                     <CalendarTitlesStyles>
                         <CalendarTitleStyles className="provi-calendar-title-culture" active={ currentCalendar == 'culture' } onClick={ () => setCurrentCalendar('culture') }>{ cultureTitle }</CalendarTitleStyles> 
-                        <span>/</span>
+                        / 
                         <CalendarTitleStyles className="provi-calendar-title-movement" active={ currentCalendar == 'movement' } onClick={ () => setCurrentCalendar('movement') }>{ movementTitle }</CalendarTitleStyles>
                     </CalendarTitlesStyles>
                     <CalendarContainerStyles>
@@ -84,6 +118,7 @@ const Mieten = ({ locale, content, global, calendars }) => {
                             }
                         </div>
                         <div className="provi-calendar-tooltips">
+                            <div className="provi-calendar-tooltips__title"> Tooltips </div>
                             <div className="provi-calendar-tooltip free"> { freeTitle } </div>
                             <div className="provi-calendar-tooltip reserved"> { reservedTitle } </div>
                             <div className="provi-calendar-tooltip occupied"> { occupiedTitle } </div>
@@ -112,37 +147,45 @@ const Mieten = ({ locale, content, global, calendars }) => {
 
 export default Mieten;
 
-const fetchCalendar = async ( id, apiKey ) => {
+// const fetchCalendar = async ( id, apiKey ) => {
 
-    const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
-    const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
-    // const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString(); // A week ago
-    // const lastDayOfNextYear = new Date().toISOString(); // Today
+//     const lastDayOfLastYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
+//     const lastDayOfNextYear = new Date(new Date().getFullYear() + 2 , 0, 1).toISOString();
+//     // const lastDayOfLastYear = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).toISOString();
+//     // const lastDayOfNextYear = new Date().toISOString();
 
-    const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?maxResults=2500&timeMin=${lastDayOfLastYear}&timeMax=${lastDayOfNextYear}&key=${apiKey}`;
+//     const url = `https://www.googleapis.com/calendar/v3/calendars/${id}/events?maxResults=2500&timeMin=${lastDayOfLastYear}&timeMax=${lastDayOfNextYear}&key=${apiKey}`;
 
-    const response = await fetch(
-        url,
-        {
-            method: 'GET'
-        }
-    )
+//     const response = await fetch(
+//         url,
+//         {
+//             method: 'GET'
+//         }
+//     )
     
     
-    const data = await response.json();
-    return data
-}
+//     const data = await response.json();
+//     return data
+// }
+
+// const fetchCalendars = async () => {
+//     const calendarCultureReserved = await fetchCalendar( 'tkjbc93c86eq34iv59b5khnp9k@group.calendar.google.com', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+//     const calendarCultureFixed = await fetchCalendar( 'ghac0j8lsmqt192fqle27oqhrc@group.calendar.google.com', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+//     const calendarMovementReserved = await fetchCalendar( 'bewegung@provitreff.ch', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+//     const calendarMovementFixed = await fetchCalendar( 'bewegung@provitreff.ch', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
+//     const calendarCultureBlocked = await fetchCalendar( 'dau8peu8ub4aopu69hu4jsl73s@group.calendar.google.com', 'AIzaSyA7CF-mjiMFBLip1aU8zEssrin4p5zTfs0' );
 
 
-export async function getServerSideProps(context) {
+//     return {
+//         calendarCultureReserved,
+//         calendarCultureFixed,
+//         calendarMovementReserved,
+//         calendarMovementFixed,
+//         calendarCultureBlocked,
+//     }
+// }
 
-    const calendarCultureReserved = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_RESERVED, process.env.NEXT_CAL_API );
-    const calendarCultureFixed = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_FIXED, process.env.NEXT_CAL_API );
-    const calendarMovementReserved = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_ESERVED, process.env.NEXT_CAL_API );
-    const calendarMovementFixed = await fetchCalendar( process.env.NEXT_CAL_ID_MOVEMENT_FIXED, process.env.NEXT_CAL_API );
-    const calendarCultureBlocked = await fetchCalendar( process.env.NEXT_CAL_ID_CULTURE_BLOCKED, process.env.NEXT_CAL_API );
-
-    console.log(calendarCultureBlocked)
+export const getStaticProps = async(context) => {
 
     let language = 'default'
 
@@ -171,14 +214,51 @@ export async function getServerSideProps(context) {
         props: {
             locale: context.locale,
             content,
-            global,
-            calendars: {
-                calendarCultureReserved,
-                calendarCultureFixed,
-                calendarMovementReserved,
-                calendarMovementFixed,
-                calendarCultureBlocked,
-            }
+            global
         }
     }
-}
+}  
+
+
+// export async function getServerSideProps(context) {
+
+//     console.log(calendarCultureBlocked)
+
+//     let language = 'default'
+
+//     switch (context.locale) {
+//         case 'en':
+//             language = 'english'
+//             break;
+//     }
+
+//     const contentData = await apolloClient.query({
+//         query: MIETEN_QUERY(),
+//         variables: {
+//             language: language
+//         }
+//     });
+
+//     const globalData = await apolloClient.query({
+//         query: GLOBAL_QUERY()
+//     });
+
+    
+//     const content = contentData.data;
+//     const global = globalData.data;
+    
+//     return {
+//         props: {
+//             locale: context.locale,
+//             content,
+//             global,
+//             calendars: {
+//                 calendarCultureReserved,
+//                 calendarCultureFixed,
+//                 calendarMovementReserved,
+//                 calendarMovementFixed,
+//                 calendarCultureBlocked,
+//             }
+//         }
+//     }
+// }
