@@ -40,8 +40,8 @@ const Mieten = ({ locale, content, global, calendars }) => {
     const downloadTitleUrlHover = content?.rentEntries[0]?.downloadTitleHover[0]?.url || '';
     const downloadsCulture = content?.rentEntries[0]?.downloadsCulture;
     const downloadsMovement = content?.rentEntries[0]?.downloadsMovement;
-    const infoContent = content?.rentEntries[0]?.infoContent || '';
-    const infoTitleUrl = content?.rentEntries[0]?.infoTitle[0]?.url || '';
+    // const infoContent = content?.rentEntries[0]?.infoContent || '';
+    // const infoTitleUrl = content?.rentEntries[0]?.infoTitle[0]?.url || '';
     // const movementCalendar = content?.rentEntries[0]?.movementCalendar || '';
     const movementTitle = content?.rentEntries[0]?.movementTitle || '';
     const occupancyContent = content?.rentEntries[0]?.occupancyContent || '';
