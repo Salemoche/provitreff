@@ -15,7 +15,7 @@ function FooterComponent() {
     return (
         <FooterStyles backgroundColor={ global?.colors?.current}>
             <div className="provi-footer-email">
-                <a className="provi-hover-text" href={ global?.proviEmail }>{global?.proviEmail}</a>
+                <a className="provi-hover-text" href={`mailto:${ global?.proviEmail }`}>{global?.proviEmail}</a>
             </div>
             <div className="provi-footer-address" dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
             <div className="provi-footer-language-switcher">

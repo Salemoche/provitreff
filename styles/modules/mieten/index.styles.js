@@ -110,7 +110,7 @@ export const CalendarContainerStyles = styled('div')`
                 flex: 1;
 
             &.occupied {
-                background: rgba(0, 0, 0, 0.3)
+                background: rgba(0, 0, 0, 0.4)
             }
 
             &.reserved {

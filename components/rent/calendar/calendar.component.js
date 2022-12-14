@@ -219,7 +219,8 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
                         href={ `mailto:${store.global.proviEmail}?subject=Reservation Bewegungsraum für den ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() }&body=Hallo, ich würde gerne den Bewegungsraum am ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() } ab ca ${i} Uhr Reservieren reservieren.` }
                         className={`bs-calendar-day-hour bs-hour-${i}`} key={`bs-hour-${i}`} style={{ gridRow: `${1 + i*4} / span 4`}}
                     >
-                        { isMonday && `${i}:00`}
+                        { isMonday && `${i}`}
+                        <div className="bs-calendar-day-hour-divider"></div>
                     </a> 
                 ))}
                 { day.events.map( (event, i) => (

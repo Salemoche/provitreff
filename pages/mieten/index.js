@@ -100,9 +100,9 @@ const Mieten = ({ locale, content, global }) => {
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(infoContent) }}></SectionStyles> */}
                 <FlexibleContentComponent content={flexibleContentRent1} />
                 <TitleComponent url={occupancyTitleUrl} hoverUrl={occupancyTitleUrlHover} id="occupancy"/>
-                <br />
+                <div class="provi-gap"></div>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(occupancyContent) }}></SectionStyles>
-                <br/><br/>
+                <div class="provi-gap"></div><div class="provi-gap"></div>
                 <SectionStyles>
                     <CalendarTitlesStyles>
                         <CalendarTitleStyles className="provi-calendar-title-culture" active={ currentCalendar == 'culture' } onClick={ () => setCurrentCalendar('culture') }>{ cultureTitle }</CalendarTitleStyles> 
@@ -118,19 +118,18 @@ const Mieten = ({ locale, content, global }) => {
                             }
                         </div>
                         <div className="provi-calendar-tooltips">
-                            <div className="provi-calendar-tooltips__title"> Tooltips </div>
                             <div className="provi-calendar-tooltip free"> { freeTitle } </div>
                             <div className="provi-calendar-tooltip reserved"> { reservedTitle } </div>
                             <div className="provi-calendar-tooltip occupied"> { occupiedTitle } </div>
                         </div>
                     </CalendarContainerStyles>
                 </SectionStyles>
-                <br/><br/>
+                <div class="provi-gap"></div><div class="provi-gap"></div>
                 {/* <TitleComponent url={termsTitleUrl} id="terms"/>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(termsContent) }}></SectionStyles> */}
                 <FlexibleContentComponent content={ currentCalendar === 'culture' ? flexibleContentRentCulture : flexibleContentRentMovement } />
                 <TitleComponent url={downloadTitleUrl} hoverUrl={downloadTitleUrlHover} id="download"/>
-                <br />
+                <div class="provi-gap"></div>
                 <DownloadsStyles>
                     { currentCalendar === 'culture' && downloadsCulture.map( ( download, i ) => (
                         <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
@@ -139,7 +138,7 @@ const Mieten = ({ locale, content, global }) => {
                         <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
                     ))}
                 </DownloadsStyles>
-                <br/><br/>
+                <div class="provi-gap"></div><div class="provi-gap"></div>
             </LayoutComponent>
         </motion.div>
 	)

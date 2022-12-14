@@ -13,6 +13,10 @@ export const FooterStyles = styled('footer')`
 
     a {
         transition: .1s;
+        text-decoration: none;
+        color: black;
+        -webkit-text-stroke: 2px transparent;
+        text-stroke: 2px transparent;
 
         &:hover {
             color: transparent;

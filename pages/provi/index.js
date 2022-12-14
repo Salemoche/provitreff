@@ -44,18 +44,18 @@ const Provi = ({ locale, content, global }) => {
         >
             <LayoutComponent>
                 <TitleComponent url={conceptTitleUrl} hoverUrl={conceptTitleUrlHover} id="concept"/>
-                <br />
+                <div class="provi-gap"></div>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(conceptContent) }}></SectionStyles>
-                <br/><br/>
+                <div class="provi-gap"></div><div class="provi-gap"></div>
                 <TitleComponent url={contactTitleUrl} hoverUrl={contactTitleUrlHover} id="contact"/>
-                <br />
+                <div class="provi-gap"></div>
                 <ContactStyles dangerouslySetInnerHTML={{__html: cleanHTML(contactContent) }}></ContactStyles>
                 <TitleComponent url={historyTitleUrl} hoverUrl={historyTitleUrlHover} id="history"/>
-                <br />
+                <div class="provi-gap"></div>
                 <ImageSliderComponent images={images} />
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(historyContent) }}></SectionStyles>
                     
-                <br/><br/>
+                <div class="provi-gap"></div><div class="provi-gap"></div>
             </LayoutComponent>
         </motion.div>
 	)

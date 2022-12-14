@@ -5,7 +5,7 @@ import { getFontSize } from '../../../lib/helpers';
 
 const CalendarLayoutStyles = styled('div')`
     .fixed {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.4);
         pointer-events: none;
     }
 
@@ -221,7 +221,17 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
                     grid-column-end: 2;
                     padding: 0 ${({ theme }) => theme.sizes.XS }px;
                     transition: background .3s;
-                    ${ props => getFontSize( 'XS', props )};
+                    ${ props => getFontSize( 'XXS', props )};
+                    position: relative;
+
+                    .bs-calendar-day-hour-divider {
+                        width: 100%;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%)
+                    }
 
                         
                     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
@@ -238,14 +248,15 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
                     }
 
                     &:hover {
-                        background: rgba(0, 0, 0, 0.3);
+                        background: rgba(0, 0, 0, 0.4);
                     }
                 }
 
                 .bs-calendar-day-event {
-                    background: rgba(0, 0, 0, 0.3);
+                    background: rgba(0, 0, 0, 0.4);
                     grid-column-start: 1;
                     grid-column-end: 2;
+                    transform: translateY(4%);
                 }
             }
         }
@@ -264,7 +275,7 @@ export const CalendarEventStyles = styled('div')`
     /* z-index: -1; */
 
     /* ${ props => {
-        return props.isReserved ? 'background: rgba(0, 0, 0, 0.15)' :  'background: rgba(0, 0, 0, 0.3)'
+        return props.isReserved ? 'background: rgba(0, 0, 0, 0.15)' :  'background: rgba(0, 0, 0, 0.4)'
     }} */
 
     

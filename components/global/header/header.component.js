@@ -78,7 +78,7 @@ function HeaderComponent() {
                 } 
                 <div className="provi-navigation-info">
                     <div className="provi-address" dangerouslySetInnerHTML={{ __html: global?.proviAddress }}></div>
-                    {global?.proviNumber && <div className="provi-number">{ global?.proviNumber }</div>}
+                    {global?.proviNumber && <a className="provi-number" href={`tel:${ global?.proviNumber }`}>{ global?.proviNumber }</a>}
                     <a className="provi-email" href={ global?.proviEmail }>{global?.proviEmail}</a>
                 </div>
             </nav>

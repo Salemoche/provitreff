@@ -9,6 +9,11 @@ export const ContentStyles = styled('div')`
     padding-top: ${ props => props.theme.sizes.navPadding }px;
     padding-bottom: ${ props => props.theme.sizes.L }px;
     hyphens: auto;
+
+    -moz-hyphenate-limit-chars: 6 3 2;     /* not yet supported */ 
+    -webkit-hyphenate-limit-chars: 6 3 2;  /* not yet supported */ 
+    -ms-hyphenate-limit-chars: 6 3 2; 
+    hyphenate-limit-chars: 6 3 2;
     
 
     > * {

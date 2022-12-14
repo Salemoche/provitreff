@@ -84,6 +84,21 @@ export default createGlobalStyle`
         color: black;
     }
 
+    p a {
+
+        color: transparent;
+        -webkit-text-stroke: 2px black;
+        text-stroke: 2px black;
+        transition: .1s;
+
+        &:hover {
+            text-decoration: none;
+            color: black;
+            -webkit-text-stroke: 2px transparent;
+            text-stroke: 2px transparent;
+        }
+    }
+
     figure {
         margin: 0;
         padding: 0;
@@ -142,6 +157,10 @@ export default createGlobalStyle`
             -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
         }
+    }
+
+    .provi-gap {
+        height: 1em;
     }
 
 
