@@ -41,8 +41,9 @@ function TitleComponent({ url, hoverUrl, link = null, isMain = false }) {
     
     const scrollToTitle = () => {
 
+        if ( window.innerWidth < 678 ) return
+
         const offset = window.innerWidth > 678 ? '240' : window.innerHeight * 0.2;
-        console.log(offset, window.innerWidth)
 
         if ( link ) router.push(link);
         document.querySelector('html').scroll({top: imageRef.current.offsetTop - offset, behavior: 'smooth' });
