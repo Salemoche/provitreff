@@ -84,7 +84,7 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
                         day={ day }
                         month={ month }
                         year={ year }
-                        href={ `mailto:${store.global.proviEmail}?subject=Reservation für den ${ day }. ${ calendar.names.de.months[month-1]} ${ year }&body=Hallo, ich würde gerne den Provitreff am ${ day }. ${ calendar.names.de.months[month-1]} ${ year } reservieren.` }
+                        // href={ `mailto:${store.global.proviEmail}?subject=Reservation für den ${ day }. ${ calendar.names.de.months[month-1]} ${ year }&body=Hallo, ich würde gerne den Provitreff am ${ day }. ${ calendar.names.de.months[month-1]} ${ year } reservieren.` }
                     >
                         <span>{day < 10 && 0}{day}</span>
                     </a>
@@ -216,7 +216,7 @@ const WeekLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, h
             <div className="bs-calendar-day" key={`bs-calendar-${Math.random()}`}>
                 { day.hours.map( (hour, i) => (
                     <a 
-                        href={ `mailto:${store.global.proviEmail}?subject=Reservation Bewegungsraum für den ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() }&body=Hallo, ich würde gerne den Bewegungsraum am ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() } ab ca ${i} Uhr Reservieren reservieren.` }
+                        // href={ `mailto:${store.global.proviEmail}?subject=Reservation Bewegungsraum für den ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() }&body=Hallo, ich würde gerne den Bewegungsraum am ${ date.getDate() }. ${ calendar.names.de.months[date.getMonth()-1]} ${ date.getFullYear() } ab ca ${i} Uhr Reservieren reservieren.` }
                         className={`bs-calendar-day-hour bs-hour-${i}`} key={`bs-hour-${i}`} style={{ gridRow: `${1 + i*4} / span 4`}}
                     >
                         { isMonday && `${i}`}

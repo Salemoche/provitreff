@@ -68,9 +68,9 @@ export const LanguageSwitcherStyles = styled('a')`
     ${ props => {
         if (props.currentLanguage) {
             return css`
-                color: transparent;
-                -webkit-text-stroke: 2px black;
-                text-stroke: 2px black;
+                color: transparent !important;
+                -webkit-text-stroke: 2px black !important;
+                text-stroke: 2px black !important;
             `
         }
     } };

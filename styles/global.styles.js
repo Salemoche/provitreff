@@ -86,16 +86,16 @@ export default createGlobalStyle`
 
     p a {
 
-        color: transparent;
-        -webkit-text-stroke: 2px black;
-        text-stroke: 2px black;
-        transition: .1s;
+        text-decoration: none;
+        color: black;
+        -webkit-text-stroke: 2px transparent;
+        text-stroke: 2px transparent;
 
         &:hover {
-            text-decoration: none;
-            color: black;
-            -webkit-text-stroke: 2px transparent;
-            text-stroke: 2px transparent;
+            color: transparent;
+            -webkit-text-stroke: 2px black;
+            text-stroke: 2px black;
+            transition: .1s;
         }
     }
 
