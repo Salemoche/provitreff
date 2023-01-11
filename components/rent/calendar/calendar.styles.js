@@ -258,6 +258,12 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
                     grid-column-end: 2;
                     transform: translateY(4%);
                 }
+
+                &:nth-of-type(5) {
+                    .bs-calendar-day-event {
+                        transform: translateY(3%);
+                    }
+                }
             }
         }
     }

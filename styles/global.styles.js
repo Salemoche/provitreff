@@ -90,12 +90,12 @@ export default createGlobalStyle`
         color: black;
         -webkit-text-stroke: 2px transparent;
         text-stroke: 2px transparent;
+        transition: .1s;
 
         &:hover {
             color: transparent;
             -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
-            transition: .1s;
         }
     }
 
