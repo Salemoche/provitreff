@@ -5,12 +5,12 @@ import { getFontSize } from '../../../lib/helpers';
 
 const CalendarLayoutStyles = styled('div')`
     .fixed {
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.5);
         pointer-events: none;
     }
 
     .reserved {
-        background: rgba(0, 0, 0, 0.15);
+        background: rgba(0, 0, 0, 0.25);
         pointer-events: none;
     }
 
@@ -21,7 +21,7 @@ const CalendarLayoutStyles = styled('div')`
 
     .bs-calendar-days-dates-item {
         &:hover {
-            background: rgba(0, 0, 0, 0.15);
+            background: rgba(0, 0, 0, 0.25);
         }
     }
 
@@ -226,7 +226,7 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
 
                     .bs-calendar-day-hour-divider {
                         width: 100%;
-                        border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.5);
                         position: absolute;
                         left: 0;
                         top: 50%;
@@ -248,12 +248,12 @@ export const WeekLayoutStyles = styled(CalendarLayoutStyles)`
                     }
 
                     &:hover {
-                        background: rgba(0, 0, 0, 0.4);
+                        background: rgba(0, 0, 0, 0.5);
                     }
                 }
 
                 .bs-calendar-day-event {
-                    background: rgba(0, 0, 0, 0.4);
+                    background: rgba(0, 0, 0, 0.5);
                     grid-column-start: 1;
                     grid-column-end: 2;
                     transform: translateY(4%);
@@ -281,7 +281,7 @@ export const CalendarEventStyles = styled('div')`
     /* z-index: -1; */
 
     /* ${ props => {
-        return props.isReserved ? 'background: rgba(0, 0, 0, 0.15)' :  'background: rgba(0, 0, 0, 0.4)'
+        return props.isReserved ? 'background: rgba(0, 0, 0, 0.25)' :  'background: rgba(0, 0, 0, 0.5)'
     }} */
 
     
