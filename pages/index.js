@@ -36,12 +36,12 @@ const Home = ({ locale, content, global }) => {
         >
             <LayoutComponent>
                 <TitleComponent url={programTitleUrl} hoverUrl={programTitleUrlHover}/>
-                <div class="provi-gap"></div>
+                <div className="provi-gap"></div>
                 <ProgramStyles>
                     { program.map( month => (
                         <div className="month" key={month.month} id={month.month}>
                             <h2>{ month.month }</h2>
-                            <div class="provi-gap"></div>
+                            <div className="provi-gap"></div>
 
                             { month.selected_events.map( event => (
                                 <EventStyles key={event.title}>
@@ -50,7 +50,7 @@ const Home = ({ locale, content, global }) => {
                                     { event.eventInfo && <div dangerouslySetInnerHTML={{ __html: cleanHTML(event.eventInfo) }}></div> }
                                 </EventStyles>
                             ))}
-                            <div class="provi-gap"></div>
+                            <div className="provi-gap"></div>
                         </div>
                     ))}
                 </ProgramStyles>

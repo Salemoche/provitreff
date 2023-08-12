@@ -28,6 +28,11 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
     const year = calendar.currentYear;
     const store = useSnapshot(state);
 
+    calendar = {
+        ...calendar,
+        firstDayOfMonth: calendar.firstDayOfMonth == 0 ? 7 : calendar.firstDayOfMonth,
+    }
+
     const parseCalendar = ( calendar ) => {
         // Transform Start and End Date and DateTime into Date
 
@@ -115,6 +120,7 @@ const MonthLayoutComponent = ({ locale, calendars, calendar, handleChangeMonth, 
         }
         return days
     }
+
 
     return(
         <MonthLayoutStyles>

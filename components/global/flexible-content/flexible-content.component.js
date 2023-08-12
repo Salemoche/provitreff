@@ -9,16 +9,16 @@ const FlexibleContentComponent = ({ content }) => {
         <>   
             { content.map( ( section, i ) => {
                 if ( section.typeHandle == 'sectionTitle' ) {
-                    return <React.Fragment key={`section-title-${i}`}><TitleComponent url={ section.sectionTitle[0].url } hoverUrl={ section.sectionTitleHover[0].url } id="download" key={`title-${i}`}/><div class="provi-gap"></div></React.Fragment>
+                    return <React.Fragment key={`section-title-${i}`}><TitleComponent url={ section.sectionTitle[0].url } hoverUrl={ section.sectionTitleHover[0].url } id="download" key={`title-${i}`}/><div className="provi-gap"></div></React.Fragment>
                 } else if ( section.typeHandle == 'standardContent' ) {
                     return (
                         <ContentStyles className="provi-content" key={`content-${i}`} isOnlyTitle={section.subtitle && !section.text}>
                             { section.subtitle && <h2>{ section.subtitle }</h2> }
-                            { section.subtitle && <div class="provi-gap"></div> }
+                            { section.subtitle && <div className="provi-gap"></div> }
                             { section.text && <div dangerouslySetInnerHTML={{ __html: section.text}}></div> }
-                            {/* { (section.subtitle || section.text) && <div class="provi-gap"></div> } */}
-                            { section.text && <div class="provi-gap"></div> }
-                            { (section.subtitle && section.text) && <div class="provi-gap"></div> }
+                            {/* { (section.subtitle || section.text) && <div className="provi-gap"></div> } */}
+                            { section.text && <div className="provi-gap"></div> }
+                            { (section.subtitle && section.text) && <div className="provi-gap"></div> }
                         </ContentStyles>
                     )
                 } else if ( section.typeHandle == 'table' ) {

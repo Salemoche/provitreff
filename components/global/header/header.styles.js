@@ -134,6 +134,8 @@ export const HeaderStyles = styled('header')`
                 display: flex;
                 align-items: center;
                 text-align: center;
+                
+                ${ props => getFontSize( 'XS', props )};
 
                 .provi-email {
                     order: 1;

@@ -5,6 +5,18 @@ import { SectionStyles } from "../../global.styles.components";
 export const DownloadsStyles = styled(SectionStyles)`
     text-align: center;
     ${ props => getFontSize( 'L', props )};
+
+    a {
+        display: block;
+        margin-bottom: ${ props => props.theme.sizes.M }px;
+    }
+    
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+        a {
+            ${ props => getFontSize( 'M', props )}
+        margin-bottom: ${ props => props.theme.sizes.S }px;
+        }
+    }
 `
 
 export const CalendarTitlesStyles = styled('div')`
@@ -15,6 +27,7 @@ export const CalendarTitlesStyles = styled('div')`
     
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
         ${ props => getFontSize( 'M', props )};
+        margin-bottom: ${ props => props.theme.sizes.M }px;
 
         span {
             display: inline-block;
@@ -57,6 +70,30 @@ export const CalendarTitleStyles = styled('h3')`
             `
         }
     } };
+
+    
+    @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
+        margin-bottom: ${ props => props.theme.sizes.XS }px;
+
+        &:hover {
+            color: transparent;
+            -webkit-text-stroke: 1px black;
+            text-stroke: 1px black;
+        }
+
+
+
+        ${ props => {
+
+            if (props.active) {
+                return css`
+                    color: transparent;
+                    -webkit-text-stroke: 1px black;
+                    text-stroke: 1px black;
+                `
+            }
+        } };
+    }
 `
 
 export const CalendarContainerStyles = styled('div')`

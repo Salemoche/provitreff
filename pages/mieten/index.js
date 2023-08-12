@@ -100,9 +100,9 @@ const Mieten = ({ locale, content, global }) => {
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(infoContent) }}></SectionStyles> */}
                 <FlexibleContentComponent content={flexibleContentRent1} />
                 <TitleComponent url={occupancyTitleUrl} hoverUrl={occupancyTitleUrlHover} id="occupancy"/>
-                <div class="provi-gap"></div>
+                <div className="provi-gap"></div>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(occupancyContent) }}></SectionStyles>
-                <div class="provi-gap"></div><div class="provi-gap"></div>
+                <div className="provi-gap"></div><div className="provi-gap"></div>
                 <SectionStyles>
                     <CalendarTitlesStyles>
                         <CalendarTitleStyles className="provi-calendar-title-culture" active={ currentCalendar == 'culture' } onClick={ () => setCurrentCalendar('culture') }>{ cultureTitle }</CalendarTitleStyles> 
@@ -124,21 +124,21 @@ const Mieten = ({ locale, content, global }) => {
                         </div>
                     </CalendarContainerStyles>
                 </SectionStyles>
-                <div class="provi-gap"></div><div class="provi-gap"></div>
+                <div className="provi-gap"></div><div className="provi-gap"></div>
                 {/* <TitleComponent url={termsTitleUrl} id="terms"/>
                 <SectionStyles dangerouslySetInnerHTML={{__html: cleanHTML(termsContent) }}></SectionStyles> */}
                 <FlexibleContentComponent content={ currentCalendar === 'culture' ? flexibleContentRentCulture : flexibleContentRentMovement } />
                 <TitleComponent url={downloadTitleUrl} hoverUrl={downloadTitleUrlHover} id="download"/>
-                <div class="provi-gap"></div>
+                <div className="provi-gap"></div>
                 <DownloadsStyles>
                     { currentCalendar === 'culture' && downloadsCulture.map( ( download, i ) => (
-                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
+                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-${i}`} download>{ download?.downloadName }</a>
                     ))}
                     { currentCalendar === 'movement' && downloadsMovement.map( ( download, i ) => (
-                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-{i}`} download>{ download?.downloadName }</a>
+                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-${i}`} download>{ download?.downloadName }</a>
                     ))}
                 </DownloadsStyles>
-                <div class="provi-gap"></div><div class="provi-gap"></div>
+                <div className="provi-gap"></div><div className="provi-gap"></div>
             </LayoutComponent>
         </motion.div>
 	)
