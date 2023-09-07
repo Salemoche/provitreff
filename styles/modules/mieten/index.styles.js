@@ -28,6 +28,7 @@ export const CalendarTitlesStyles = styled('div')`
     @media screen and ( max-width: ${ props => props.theme.breakpoints.M }px) {
         ${ props => getFontSize( 'M', props )};
         margin-bottom: ${ props => props.theme.sizes.M }px;
+        line-height: 30px;
 
         span {
             display: inline-block;

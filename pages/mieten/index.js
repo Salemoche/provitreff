@@ -132,10 +132,10 @@ const Mieten = ({ locale, content, global }) => {
                 <div className="provi-gap"></div>
                 <DownloadsStyles>
                     { currentCalendar === 'culture' && downloadsCulture.map( ( download, i ) => (
-                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-${i}`} download>{ download?.downloadName }</a>
+                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-${i}`} target="_blank" download>{ download?.downloadName }</a>
                     ))}
                     { currentCalendar === 'movement' && downloadsMovement.map( ( download, i ) => (
-                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-${i}`} download>{ download?.downloadName }</a>
+                        <a className="provi-hover-text" href={download?.downloadFile[0]?.url} key={`download-${i}`} target="_blank" download>{ download?.downloadName }</a>
                     ))}
                 </DownloadsStyles>
                 <div className="provi-gap"></div><div className="provi-gap"></div>
