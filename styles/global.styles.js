@@ -8,8 +8,7 @@ export default createGlobalStyle`
         font-family: 'Rodger';
         font-weight: 300;
         font-style: 'regular';
-        src: url('/fonts/Rodger-Bold.otf') format('woff'),
-            url('/fonts/Rodger-Bold.woff') format('woff'),
+        src: url('/fonts/Rodger-Bold.woff') format('woff'),
             url('/fonts/Rodger-Bold.woff2') format('woff2');
     }
 
@@ -17,8 +16,7 @@ export default createGlobalStyle`
         font-family: 'Rodger';
         font-weight: 300;
         font-style: 'italic';
-        src: url('/fonts/Rodger-Bold.otf') format('woff'),
-            url('/fonts/Rodger-Bold.woff') format('woff'),
+        src: url('/fonts/Rodger-Bold.woff') format('woff'),
             url('/fonts/Rodger-Bold.woff2') format('woff2');
     }
 
@@ -91,11 +89,13 @@ export default createGlobalStyle`
         -webkit-text-stroke: 2px transparent;
         text-stroke: 2px transparent;
         transition: .1s;
+        font-weight: 300;
 
         &:hover {
             color: transparent;
             -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
+            font-weight: 300;
         }
     }
 
@@ -122,6 +122,7 @@ export default createGlobalStyle`
         -webkit-text-stroke: 2px transparent;
         text-stroke: 2px transparent;
         cursor: pointer;
+        font-weight: 300;
 
         &:disabled {
             ${'' /* border: none; */}
@@ -134,6 +135,7 @@ export default createGlobalStyle`
             color: transparent;
             -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
+            font-weight: 300;
             ${'' /* background: black; */}
         }
     }
@@ -156,6 +158,7 @@ export default createGlobalStyle`
             color: transparent;
             -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
+            font-weight: 300;
         }
     }
 

@@ -14,7 +14,7 @@ const MetaComponent = ( {title, description, imageUrl }) => {
             <meta name="og:image" content={imageUrl} />
             <meta property="og:NEXT_PUBLIC_SITE_NAME" content="Provi Treff" />
             <link rel="icon" href="/favicon.ico" />
-            <link rel="preload" href="/fonts/Rodger-Bold.otf" as="font" crossOrigin=""/>
+            <link rel="preload" href="/fonts/Rodger-Bold.woff" as="font" crossOrigin=""/>
             <link rel="preload" href="/fonts/Rodger-BoldItalic.woff" as="font" crossOrigin=""/>
         </Head>
     )

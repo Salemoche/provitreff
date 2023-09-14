@@ -175,6 +175,7 @@ export const MenuItemStyles = styled('a')`
         color: transparent;
         -webkit-text-stroke: 2px black;
         text-stroke: 2px black;
+        font-weight: 300;
     }
 
     ${ props => {
@@ -183,6 +184,7 @@ export const MenuItemStyles = styled('a')`
                 color: transparent;
                 -webkit-text-stroke: 2px black;
                 text-stroke: 2px black;
+                font-weight: 300;
             `
         }
     } };
@@ -205,6 +207,7 @@ export const BurgerStyles = styled('div')`
                 color: transparent;
                 -webkit-text-stroke: 2px black;
                 text-stroke: 2px black;
+                font-weight: 300;
             `
         }
     } };

@@ -49,6 +49,7 @@ export const CalendarTitleStyles = styled('h3')`
         color: transparent;
         -webkit-text-stroke: 2px black;
         text-stroke: 2px black;
+        font-weight: 300;
     }
 
     &.provi-calendar-title-culture {
@@ -68,6 +69,7 @@ export const CalendarTitleStyles = styled('h3')`
                 color: transparent;
                 -webkit-text-stroke: 2px black;
                 text-stroke: 2px black;
+                font-weight: 300;
             `
         }
     } };
@@ -78,8 +80,9 @@ export const CalendarTitleStyles = styled('h3')`
 
         &:hover {
             color: transparent;
-            -webkit-text-stroke: 1px black;
-            text-stroke: 1px black;
+            -webkit-text-stroke: 2px black;
+            text-stroke: 2px black;
+            font-weight: 300;
         }
 
 
@@ -89,8 +92,9 @@ export const CalendarTitleStyles = styled('h3')`
             if (props.active) {
                 return css`
                     color: transparent;
-                    -webkit-text-stroke: 1px black;
-                    text-stroke: 1px black;
+                    -webkit-text-stroke: 2px black;
+                    text-stroke: 2px black;
+                    font-weight: 300;
                 `
             }
         } };

@@ -17,11 +17,13 @@ export const FooterStyles = styled('footer')`
         color: black;
         -webkit-text-stroke: 2px transparent;
         text-stroke: 2px transparent;
+        font-weight: 300;
 
         &:hover {
             color: transparent;
             -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
+            font-weight: 300;
         }
     }
     
@@ -71,6 +73,7 @@ export const LanguageSwitcherStyles = styled('a')`
                 color: transparent !important;
                 -webkit-text-stroke: 2px black !important;
                 text-stroke: 2px black !important;
+                font-weight: 300;
             `
         }
     } };

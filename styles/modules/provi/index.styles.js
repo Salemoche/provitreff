@@ -17,6 +17,7 @@ export const ContactStyles = styled(SectionStyles)`
             color: transparent;
             -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
+            font-weight: 300;
         }
     }
 
