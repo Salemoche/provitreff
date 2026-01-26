@@ -5,6 +5,7 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: false,
+    turbopack: {},
     i18n: {
         locales: ['de', 'en'],
         defaultLocale: 'de',
