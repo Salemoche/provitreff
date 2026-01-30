@@ -4,8 +4,9 @@ import { ImageSliderStyles } from './image-slider.styles';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from "swiper";
 
-import "swiper/css";
-import "./styles.css";
+// Todo: check if styles are imported in _app.js
+// import "swiper/css";
+// import "./styles.css";
 
 const ImageSliderComponent = ({ images }) => {
 

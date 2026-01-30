@@ -15,6 +15,10 @@ import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
+
+import "swiper/css";
+import "./styles.css";
+
 // Animation
 import { AnimatePresence } from 'framer-motion'
 
