@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { getFontSize } from "../lib/helpers";
-import arrowRight from '/public/assets/img/arrow-right.svg'
-import arrowLeft from '/public/assets/img/arrow-right.svg'
+// import arrowRight from '/public/assets/img/arrow-right.svg'
+// import arrowLeft from '/public/assets/img/arrow-right.svg'
 
 export default createGlobalStyle`
     @font-face {

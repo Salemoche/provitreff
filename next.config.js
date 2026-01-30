@@ -5,7 +5,14 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: false,
-    turbopack: {},
+    turbopack: {
+        rules: {
+        '*.svg': {
+            loaders: ['@svgr/webpack'],
+            as: '*.js',
+        },
+        },
+    },
     i18n: {
         locales: ['de', 'en'],
         defaultLocale: 'de',

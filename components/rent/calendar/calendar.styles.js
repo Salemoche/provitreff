@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { arrowRight } from '/public/assets/img/arrow-right.svg';
-import { arrowLeft } from '/public/assets/img/arrow-left.svg';
+import arrowRight from '../../../public/assets/img/arrow-right.svg';
+import arrowLeft from '../../../public/assets/img/arrow-left.svg';
 import { getFontSize } from '../../../lib/helpers';
 
 const CalendarLayoutStyles = styled('div')`
